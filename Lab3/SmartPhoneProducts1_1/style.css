@@ -17,8 +17,7 @@ img {
 img:hover {
     box-shadow: 0 0 5px 1px black;
 }
-.rotate img
-{
+.rotate img {
   animation: rotation .3s infinite linear;
 }
 
