@@ -9,15 +9,8 @@
     <script>
         var store_name = " Ashley Andres";
         first_name = 'Ashley';
-        last_name = 'Andres';
-
+        last_name = 'Andres'
         var now = new Date();
-
-console.log(formatAMPM(new Date));
-
-
-
-
   
     </script>
 </head>
@@ -32,10 +25,7 @@ hits_span.innerHTML = hits;
             document.write(
            "<b> " + first_name + " </b><i> " + last_name + "</i>'s"
             );
-    
-        
             
-
         </script> 
         </span>
             
@@ -46,7 +36,7 @@ hits_span.innerHTML = hits;
     <p style="text-align: center; font-weight: bold;">
         Hits:<span id="hits_span">0</span>
         Spins:<span id="spins_span">0</span>
-        Hit/Spin: <span id="hit_spin_span">0</span>
+        Hit/Spin: <span  id="hit_spin_span"> ${} </span> 
         </p>
       </header>  
     <div>
@@ -120,7 +110,7 @@ hits_span.innerHTML = hits;
             <tr><th colspan="2"><h1>Your One Stop For Used Phones - ${first_name[0] + '.' +last_name[0] + '.'}'s</h1></th></tr>
             <tr><td>1.</td><td><br />Copyright @ ${first_name + last_name}<fullname> </td></tr>
             <tr><td>2.</td><td>${now.getFullYear()}</td></tr>
-            <tr><td>3.</td><td>${now.getHours() + ':' + now.getMinutes()} ${(now.getHours()<12) ? "AM" : "PM" } </td></tr>
+            <tr><td>3.</td><td>${(now.getHours() +11) %12 +1  + ':' + now.getMinutes()} ${(now.getHours()<12) ? "AM" : "PM" } </td></tr>
         </table>
         `);
         </script>
