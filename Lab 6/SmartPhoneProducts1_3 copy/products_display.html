@@ -8,41 +8,61 @@
     <style id="localStyle">.rotate img {animation-duration: 2.8s;}</style>
     <script>
         var store_name = " Ashley Andres";
+        first_name = 'Ashley';
+        last_name = 'Andres';
+
+  var d = new Date();
+  var x = document.getElementById("demo");
+  var h = addZero(d.getHours());
+  var m = addZero(d.getMinutes());
+  var s = addZero(d.getSeconds());
     </script>
 </head>
 <body onload= " 
 hits_span.innerHTML = hits;
     spins_span.innerHTML = spins;
     ">
-    <header></header><h1>
+    <header>
+        <center>
+     <span style="font-size: 600%;">
         <script>
-            document.write(store_name);
-        </script>'s
+            document.write(
+           "<b> " + first_name + " </b><i> " + last_name + "</i>'s"
+            );
+    
+        
+            
+
+        </script> 
+        </span>
+            
+    <h1>    
         Used Smart Phone Store
     </h1>  
+</center>
     <p style="text-align: center; font-weight: bold;">
         Hits:<span id="hits_span">0</span>
         Spins:<span id="spins_span">0</span>
+        Hit/Spin: <span id="hit_spin_span">0</span>
         </p>
-        
+      </header>  
     <div>
         <input id="speedSlider" type="range" min=".1" max="5" step=".1" onchange="
         localStyle.innerHTML = '.rotate img {animation-duration: ' + speedSlider.value + 's;}';
         " style="direction: rtl;"> 
         <main> 
-    <section  class="item"  onmouseover="
-    spins += spins 2; 
-    spins_span.innerHTML += 2;
-    this.className = 'item rotate';
-    hit_spin_span.innerHTML = 'test'
+    <section  class="item"  
+    onmouseover="
+        spins_span.innerHTML = ++spins;
+        this.className = 'item rotate';
+        hit_spin_span.innerHTML = hits_span.innerHTML/spins_span.innerHTML;
     "
      onclick="
-     hits = hits +1;
-     hits_span.innerHTML = hits;
-     this. className='item';"> 
-    > 
+        hits_span.innerHTML =  ++hits;
+        this. className='item';"> 
+
         <h2>HTC</h2> 
-        <p> &dollar;40.00,</p>
+        <p> &dollar;40.00</p>
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg">
     </section>
 
@@ -90,12 +110,23 @@ hits_span.innerHTML = hits;
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg" ">
     </section>
 </main></div> 
-<footer><h1>Your One Stop Phone Shop - 
+<footer>
+    <script>
+    document.write(`
+        <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tr><th colspan="2"><h1>Your One Stop For Used Phones - ${first_name[0] + '.' +last_name[0] + '.'}'s</h1></th></tr>
+            <tr><td>1.</td><td><br />Copyright @ ${first_name + last_name}<fullname> </td></tr>
+            <tr><td>2.</td><td>${d.getFullYear}</td></tr>
+            <tr><td>3.</td><td>${h}</td></tr>
+        </table>
+        `);
+        </script>
+    <h1>Your One Stop Phone Shop - 
     <script>
          document.write(store_name);
     </script>'s
     <h1>
-
+        
 </footer>
 </body>
 </html>
