@@ -30,12 +30,15 @@ hits_span.innerHTML = hits;
         localStyle.innerHTML = '.rotate img {animation-duration: ' + speedSlider.value + 's;}';
         " style="direction: rtl;"> 
         <main> 
-    <section  class="item"  onmouseover="spins = spins + 1; hits_span.innerHTML = hits;spins_span.innerHTML = spins;
-    this.className = 'item rotate';"
+    <section  class="item"  onmouseover="
+    spins += spins 2; 
+    spins_span.innerHTML += 2;
+    this.className = 'item rotate';
+    hit_spin_span.innerHTML = 'test'
+    "
      onclick="
      hits = hits +1;
      hits_span.innerHTML = hits;
-     spins_span.innerHTML = spins;
      this. className='item';"> 
     > 
         <h2>HTC</h2> 
