@@ -11,11 +11,9 @@
         first_name = 'Ashley';
         last_name = 'Andres';
 
-  var d = new Date();
-  var x = document.getElementById("demo");
-  var h = addZero(d.getHours());
-  var m = addZero(d.getMinutes());
-  var s = addZero(d.getSeconds());
+        var now = new Date();
+
+  
     </script>
 </head>
 <body onload= " 
@@ -116,8 +114,8 @@ hits_span.innerHTML = hits;
         <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
             <tr><th colspan="2"><h1>Your One Stop For Used Phones - ${first_name[0] + '.' +last_name[0] + '.'}'s</h1></th></tr>
             <tr><td>1.</td><td><br />Copyright @ ${first_name + last_name}<fullname> </td></tr>
-            <tr><td>2.</td><td>${d}</td></tr>
-            <tr><td>3.</td><td>${h}</td></tr>
+            <tr><td>2.</td><td>${now.getFullYear()}</td></tr>
+            <tr><td>3.</td><td>${now.getHours() + ':' + now.getMinutes() + (now.getHours()< 12)? "AM" : "PM"} </td></tr>
         </table>
         `);
         </script>
