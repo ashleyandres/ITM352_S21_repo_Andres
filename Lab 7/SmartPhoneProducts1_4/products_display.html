@@ -11,6 +11,7 @@
         first_name = 'Ashley';
         last_name = 'Andres'
         var now = new Date();
+        var over_half = false
   
     </script>
 </head>
@@ -36,7 +37,8 @@ hits_span.innerHTML = hits;
     <p style="text-align: center; font-weight: bold;">
         Hits:<span id="hits_span">0</span>
         Spins:<span id="spins_span">0</span>
-        Hit/Spin: <span  id="hit_spin_span"> ${} </span> 
+        Hit/Spin: <span  id="hit_spin_span">0</span> 
+        You win:<span id="win_span">pending...</span>
         </p>
       </header>  
     <div>
@@ -49,10 +51,17 @@ hits_span.innerHTML = hits;
         spins_span.innerHTML = ++spins;
         this.className = 'item rotate';
         hit_spin_span.innerHTML = (hits_span.innerHTML/spins_span.innerHTML) .toFixed(2);
+        win_span.innerHTML = over_half;
+        over_half|| =  ((hits/spins >= 0.5 )&& (hits < spins));
     "
      onclick="
         hits_span.innerHTML =  ++hits;
-        this. className='item';"> 
+        this. className='item';
+        hit_spin_span.innerHTML = (hits_span.innerHTML/spins_span.innerHTML) .toFixed(2);
+        win_span.innerHTML = ((hits/spins >= 0.5 )&& (hits < spins));
+        over_half|| =  ((hits/spins >= 0.5 ) && (hits < spins));
+        "
+        > 
 
         <h2>HTC</h2> 
         <p> &dollar;40.00</p>
