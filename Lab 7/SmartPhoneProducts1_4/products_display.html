@@ -48,18 +48,45 @@ hits_span.innerHTML = hits;
         <main> 
     <section  class="item"  
     onmouseover="
-        spins_span.innerHTML = ++spins;
-        this.className = 'item rotate';
-        hit_spin_span.innerHTML = (hits_span.innerHTML/spins_span.innerHTML) .toFixed(2);
-        win_span.innerHTML = over_half;
-        over_half|| =  ((hits/spins >= 0.5 )&& (hits < spins));
+        if(!this.className.includes('rotate')){
+            spins_span.innerHTML = ++spins;
+            this.className = 'item rotate';   
+       
+       }  
+       // -- Winning progress depends on hits/spins
+                hits_spins_ratio = hits/spins;
+                if ( hits_spins_ratio > 0 && hits_spins_ratio < 0.25 ) {
+                    progress = 'On your way!';
+                }
+                  else if ( hits_spins_ratio > 0 && hits_spins_ratio < 0.25 ) {
+                        progress = 'Almost there!';
+                  }
+                   else if ( hits_spins_ratio < 0.5 ) {
+                       if ( hits < spins) {
+                            progress = 'You win!';
+                        }
+                    }
+                else {
+                    progress = 'Get going!' ;
+                }
+            
+
+        hit_spin_span.innerHTML = (hits_spins_ratio).toFixed(2); 
+   
+        over_half ||= ((hits_spins_ratio >= 0.5 )&& (hits < spins));win_span.innerHTML = progress;
     "
      onclick="
-        hits_span.innerHTML =  ++hits;
-        this. className='item';
+    // if(this.className.includes('rotate')){
+       hits_span.innerHTML =  ++hits;
+        this. className='item';  
+   //  } else {
+     //    this.className = 'item rotate'
+   //  }
+        
+
         hit_spin_span.innerHTML = (hits_span.innerHTML/spins_span.innerHTML) .toFixed(2);
+        over_half||=  ((hits/spins >0.5 ) && (hits < spins));
         win_span.innerHTML = ((hits/spins >= 0.5 )&& (hits < spins));
-        over_half|| =  ((hits/spins >= 0.5 ) && (hits < spins));
         "
         > 
 
