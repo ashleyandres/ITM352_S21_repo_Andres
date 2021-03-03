@@ -1,0 +1,31 @@
+body {
+    width: 800px;
+    margin:0 auto;
+    background-image:url("file:///Users/ashleyandres/Documents/GitHub/ITM352_S21_repo_Andres/Lab%202/SmartPhoneProducts1/images/Picture1.jpg");
+}
+/* This is my used phones website */  
+/* No edit to the typography */  
+
+img {
+    max-width: 200px;
+    height: 200px;
+}
+h1,h2 {
+    text-align: center;
+}
+main{
+    display: flex;
+	flex-flow: row wrap;
+    justify-content: space-around;
+    /* makes stuff centered and pretty */  
+    /* Center makes it more eyecatching */ 
+
+}
+div {
+    border: 5px solid black;
+    display: flex;
+    /* black and thin */  
+
+}
+
+/* Styling the products display */ 
