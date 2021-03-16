@@ -5,4 +5,6 @@ repeat forever {
     if not step tjem {
         turn right
     }
-}
+var monthkey = [{month: "January", key: 0};
+                {month: "February", key: 1};
+];
