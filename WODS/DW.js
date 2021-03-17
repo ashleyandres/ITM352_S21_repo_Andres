@@ -1,6 +1,6 @@
-d = 6
-m = August
-yr = 2000
+day = 6;
+month = 'August';
+year = 2000;
 step1 = 
 if (January || February);{
     step1 = 1 - yr
@@ -11,8 +11,8 @@ else(!January || !February);{
 step2 = step1 + parseInt(step1/4) 
 step3 = step2 - parseInt(step1/100)
 step4 = step3 + parseInt(step1/400)
-step5 = d + step4
-step6 =
+step5 = day + step4
+
 monthkey = 
 {"January":0,
 "February":1,
@@ -27,7 +27,8 @@ monthkey =
 "November":2,
 "December":4
 };
-step7 = %(step6/7)
+step6 = step5 + monthkey(month);
+step7 = step6%7;
 d.getday(); 
 day = [
     {'day': 'Sunday', 'number': 0},
@@ -39,7 +40,7 @@ day = [
     {'day': 'Saturday', 'number': 6},
 
 ];
-console.log(day, month, year)
+console.log(${month} ${day} $(year) was a ${}
 
 
 
