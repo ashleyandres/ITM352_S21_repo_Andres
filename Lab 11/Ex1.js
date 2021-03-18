@@ -1,15 +1,16 @@
 //FINDS IF AN INTERGER IS POSITIVE
-function isPositiveInt(q){
-    errors = []; // assume no errors at first
-if(Number(q) != q,returnErrors ) errors.push('Not a number!'); // Check if string is a number value
-if(q < 0) errors.push('Negative value!'); // Check if it is non-negative
-if(parseInt(q) != q) errors.push('Not an integer!'); // Check that it is an integer
-returnErrors ? errors : (errors.length == 0).  (errors.length == 0)
-}
-while ( product = 0; product > 0; i++){
-return = (Number);
-else if  (product)
-}
+function isNonNegInt(string_to_check, returnErrors = false) {
+    errors = []; 
+    // This function will return true if string_to_check is a NonNegInt. If returnErrors = true, it will return an array of reasons why it is a NonNegInt. 
+    if(Number(string_to_check) != string_to_check) errors.push('Not a number!'); 
+    // Check if string is a number value
+    if(string_to_check < 0) errors.push('Negative value!'); 
+    // Check if it is non-negative
+    if(parseInt(string_to_check) != string_to_check) errors.push('Not an integer!'); 
+    // Check that it is an integer
+    return returnErrors ? errors : (errors.length == 0);
+    }
+    
 
 checkIt ('item', 'index'){
     console.log(`part ${index} is ${(isNonNegInt(item)?'a':'not a')} quantity`);
