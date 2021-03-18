@@ -2,44 +2,6 @@
     /*
     This is my first invoice using coding ^-^
     */
-function generate_item_rows(product_quantities_array){
-  //prints rows
-  
-  extended_price = product_quantities_array[0] *price1;
- subtotal = extended_price + subtotal;
-    document.write(`
-<tr>
-  <td width="43%">${item1}</td>
-  <td align="center" width="11%">${product_quantities_array[0]}</td>
-  <td width="13%">\$${price1}</td>
-  <td width="54%">\$${extended_price.toFixed(2)}</td>
-</tr>
-`);
-}
-   //Product Data
-   var products = [
-   name1 = "HTC";
- price1 = 40.00;
- image1 = "http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg";
-
- name2 = "Apple";
- price2 = 75.00;
- image2 = "http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg";
-
- name3 = "Nokia";
- price3 = 35.00;
- image3 = "http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg";
-
- name4 = "Samsung";
- price4 = 45.00;
- image4 = "http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg";
-
- name5 = "Blackberry";
- price5 = 10.00;
- image5 = "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg";
-
-   ];
-   var quantities = [0,1,2,3,4]
 
     // Product 1
     var item1 = 'Gillette Sensor 3 Razor';
@@ -91,12 +53,16 @@ function generate_item_rows(product_quantities_array){
           </tr>
 
 <script>
-var extended_price;
-var subtotal = 0;
-
-  extended_price = quantity1*price1;
-  subtotal = extended_price + subtotal;
-   generate_item_rows(quantities);
+  var extended_price = quantity1*price1;
+  var subtotal = extended_price + subtotal;
+    document.write(`
+<tr>
+  <td width="43%">${item1}</td>
+  <td align="center" width="11%">${quantity1}</td>
+  <td width="13%">\$${price1}</td>
+  <td width="54%">\$${extended_price.toFixed(2)}</td>
+</tr>
+`);
 </script>
 
 <script>
