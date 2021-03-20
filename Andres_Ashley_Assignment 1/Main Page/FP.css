@@ -1,0 +1,15 @@
+h1 {
+    text-align: center;
+}
+main{
+    display: flex;
+	flex-flow: row wrap;
+    justify-content: space-around;
+    /* makes stuff centered and pretty */  
+    /* Center makes it more eyecatching */ 
+
+}
+img {
+    max-width: 200px;
+    height: 200px;
+}
