@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feng Shui</title>
+
+  <!--CSS stylesheets-->
+  <link rel="stylesheet" href="FP.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Open+Sans">
+
+  <script>
+  //product1
+var name1 = "Black/Gold Bracelet";
+var price1 = 40.00;
+var image1 = "https://images-na.ssl-images-amazon.com/images/I/71eh8QANwIL._AC_UY695_.jpg";
+
+//product2
+var name2 = "Green Stone Bracelet";
+var price2 = 75.00;
+var image2 = "https://images-na.ssl-images-amazon.com/images/I/61bUpCCIFWL._AC_UY695_.jpg";
+
+//product3
+var name3 = "White/Gold Bracelet";
+var price3 = 35.00;
+var image3 = "https://images-na.ssl-images-amazon.com/images/I/61sraQV82kL._AC_UY695_.jpg";
+
+//product4
+var name4 = "Purple Bracelet";
+var price4 = 45.00;
+var image4 = "https://images-na.ssl-images-amazon.com/images/I/617vEEak3xL._AC_UY695_.jpg";
+
+//product5
+var name5 = "Pink Bracelet";
+var price5 = 10.00;
+var image5 = "https://m.media-amazon.com/images/I/61gFZ1EfedL._AC_SY695._SX._UX._SY._UY_.jpg";
+
+
+
+</script>
+</head>
+<body>
+  
+  
+
+  <!--PageBanner-->
+  <header class=>
+    <h1> Feng Shui</h1>
+
+    <div class= "logo">
+    <img src=https://i.pinimg.com/736x/af/5d/ae/af5daea0c0412c3967fbed8f08f04a97.jpg>
+  </div>
+
+<!--NavBar-->
+<div class="navbar nav_button">
+  <div class="navbar_button">
+    <a  href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i></i></a>
+    <a class="home_button"href="file:///Users/ashleyandres/Documents/GitHub/ITM352_S21_repo_Andres/Andres_Ashley_Assignment%201/Main%20Page/index.html" >Home</a>
+    <a href="#" class="shop_button">Shop</a>
+    <a href="#" class="search_button">Search</a>
+  </div>
+
+  </header>
+
+<div class= "products">
+  <div class="bracelet" >
+    <h2>Bracelets</h2>
+  </div>
+   <main> 
+      <script>
+            for (i=1; i <= eval("typeof name"+i) != 'undefined'; i++){
+            document.write(`
+            <section class="item"> 
+            <img src=${eval('image' +i)}> 
+            <h2>${eval('name' +i)}</h2> 
+             <p class ="item_price"> \$${eval('price' +i).toFixed(2)}</p>
+        </section>
+            `);
+    }
+      </script>
+  </main>
+</div> 
+<footer style="background-color: maroon; text-align: center;color: white;"><h1>Bringing Luck Into Your Year!</h1>
+</footer>
+
+</body>
+</html>
