@@ -43,37 +43,49 @@
       return returnErrors ? errors : (errors.length == 0);
       }
      //Product Data
-     var products = [
-      products1 = 
-      {
-          name : "HTC", price : 40.00, image  : "http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg"
-  },
-  
-  
-       products2 = {
-      name : "Apple",
-      price :75.00,
-       image  : "http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg"
-       },
-  
-  
-       products3 = {name : "Nokia",
-      price :35.00,
-       image  : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg"
-      },
-  
-       products4 = {
-      name : "Samsung",
-      price :45.00,
-       image  : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg"
-       },
-  
-       products5 = {
-      name : "Blackberry",
-      price :10.00,
-       image  : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg"
-       }  
-          ];
+    var products = [
+
+    //product1
+products1 = {
+  name : "Black/Gold Bracelet",
+  price : 40.00,
+  image : "https://images-na.ssl-images-amazon.com/images/I/71eh8QANwIL._AC_UY695_.jpg"
+    },
+
+
+//product2
+products2 = {
+ name :"Green Stone Bracelet",
+ price: 75.00,
+ image : "https://images-na.ssl-images-amazon.com/images/I/61bUpCCIFWL._AC_UY695_.jpg"
+},
+
+
+//product3
+products3 = {
+name : "White/Gold Bracelet",
+price : 35.00,
+image : "https://images-na.ssl-images-amazon.com/images/I/61sraQV82kL._AC_UY695_.jpg"
+},
+
+
+//product4
+products4 = {
+name : "Purple Bracelet",
+price : 45.00,
+image : "https://images-na.ssl-images-amazon.com/images/I/617vEEak3xL._AC_UY695_.jpg"
+},
+
+
+//product5
+products5 = {
+name : "Pink Bracelet",
+price : 10.00,
+image : "https://m.media-amazon.com/images/I/61gFZ1EfedL._AC_SY695._SX._UX._SY._UY_.jpg"
+}
+
+
+    ];
   
   var quantities = [0,1,2,3,4]
   
@@ -117,7 +129,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
   </head>
-  <body>
+  <body style =" display:inherit">
       <table border="4">
           <tbody>
             <tr>
@@ -186,7 +198,7 @@
             </tr>
           </tbody>
         </table>
-        <div><b>
+        <div style = "flex-flow: wrap;max-width: 50%;"><b>
           OUR SHIPPING POLICY IS:A subtotal $0 - $49.99 will be $2 shipping
   A subtotal $50 - $99.99 will be $5 shipping
   Subtotals over $100 will be charged 5% of the subtotal amount </b>

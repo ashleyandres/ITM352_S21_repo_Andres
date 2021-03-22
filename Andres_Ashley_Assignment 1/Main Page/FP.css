@@ -3,6 +3,7 @@ body {
     color: black;
     background-color: #fff;
     font-size: 20px;
+   
 }
 h1,h2 {
     font-family: "Times New Roman", sans-serif;
@@ -27,6 +28,7 @@ img {
     max-width: 200px;
     height: 200px;
     margin: 10px 5px 10px 5px;
+    box-sizing: border-box;
 }
 
 .logo img{
@@ -38,8 +40,8 @@ main{
     display: flex;
 	flex-flow: wrap;
     justify-content: space-around;
-    box-sizing: inherit;
     text-align: center;
+    
     /* makes stuff centered and pretty */  
     /* Center makes it more eyecatching */ 
 
@@ -64,5 +66,12 @@ main{
 .item{
     text-align: left;
 }
-
+.button {
+    font-style: 'Times New Roman';
+    box-shadow: #ddd;
+    width: 100%;
+    background-color: black;
+    color: white;
+    
+}
 

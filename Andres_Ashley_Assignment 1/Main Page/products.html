@@ -11,30 +11,51 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Open+Sans">
 
   <script>
-  //product1
-var name1 = "Black/Gold Bracelet";
-var price1 = 40.00;
-var image1 = "https://images-na.ssl-images-amazon.com/images/I/71eh8QANwIL._AC_UY695_.jpg";
+    var num =5;
+    products_array = [
+
+    //product1
+products1 = {
+  name : "Black/Gold Bracelet",
+  price : 40.00,
+  image : "https://images-na.ssl-images-amazon.com/images/I/71eh8QANwIL._AC_UY695_.jpg"
+    },
+
 
 //product2
-var name2 = "Green Stone Bracelet";
-var price2 = 75.00;
-var image2 = "https://images-na.ssl-images-amazon.com/images/I/61bUpCCIFWL._AC_UY695_.jpg";
+products2 = {
+ name :"Green Stone Bracelet",
+ price: 75.00,
+ image : "https://images-na.ssl-images-amazon.com/images/I/61bUpCCIFWL._AC_UY695_.jpg"
+},
+
 
 //product3
-var name3 = "White/Gold Bracelet";
-var price3 = 35.00;
-var image3 = "https://images-na.ssl-images-amazon.com/images/I/61sraQV82kL._AC_UY695_.jpg";
+products3 = {
+name : "White/Gold Bracelet",
+price : 35.00,
+image : "https://images-na.ssl-images-amazon.com/images/I/61sraQV82kL._AC_UY695_.jpg"
+},
+
 
 //product4
-var name4 = "Purple Bracelet";
-var price4 = 45.00;
-var image4 = "https://images-na.ssl-images-amazon.com/images/I/617vEEak3xL._AC_UY695_.jpg";
+products4 = {
+name : "Purple Bracelet",
+price : 45.00,
+image : "https://images-na.ssl-images-amazon.com/images/I/617vEEak3xL._AC_UY695_.jpg"
+},
+
 
 //product5
-var name5 = "Pink Bracelet";
-var price5 = 10.00;
-var image5 = "https://m.media-amazon.com/images/I/61gFZ1EfedL._AC_SY695._SX._UX._SY._UY_.jpg";
+products5 = {
+name : "Pink Bracelet",
+price : 10.00,
+image : "https://m.media-amazon.com/images/I/61gFZ1EfedL._AC_SY695._SX._UX._SY._UY_.jpg"
+}
+
+
+    ];
+ 
 
 
 
@@ -69,15 +90,18 @@ var image5 = "https://m.media-amazon.com/images/I/61gFZ1EfedL._AC_SY695._SX._UX.
   </div>
    <main> 
       <script>
-            for (i=1; i <= eval("typeof name"+i) != 'undefined'; i++){
-            document.write(`
-            <section class="item"> 
-            <img src=${eval('image' +i)}> 
-            <h2>${eval('name' +i)}</h2> 
-             <p class ="item_price"> \$${eval('price' +i).toFixed(2)}</p>
-        </section>
-            `);
-    }
+             for (i=0; i <= eval("typeof name"+i) != 'undefined'; i++){
+        document.write(`
+        <section class="item"> 
+        <img src=${products_array[i].image}>
+        <h2>${products_array[i].name}</h2> 
+        <p> \$${(products_array[i].price).toFixed(2)}</p>
+        <button type="submit" class = "button">
+        <span data-add-to-cart-text> Add to Cart</span>
+      </button>
+    </section>
+        `);
+}
       </script>
   </main>
 </div> 
