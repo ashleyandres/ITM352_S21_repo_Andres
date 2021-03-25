@@ -1,14 +1,14 @@
-var express = require('express');
-var myParser = require("body-parser");
-var fs = require('fs');
-var app = express();
-app.use(myParser.urlencoded({extended: true}));
+var http = require('http'); 
 
-app.post("/process_name", function (request, response){
-    // response.send(requesnt.body);
-    let POST = request.body;
-    var contents = fs.readFileSync('./View/display_login_template.html', 'utf8');
-    response.send(eval('`' + contents + '`')); // render template string
+var server = http.createServer(function (req, res) {   
+   
+    if (req.url == '/data') 65{ //check the URL of the current request
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.write(JSON.stringify({ message: "Hello World"}));  
+            res.end();  
+    }
 });
-app.use(express.static('./public'));
-app.listen(8080);
+
+server.listen(5000);
+
+console.log('Node.js web server at port 5000 is running..')
