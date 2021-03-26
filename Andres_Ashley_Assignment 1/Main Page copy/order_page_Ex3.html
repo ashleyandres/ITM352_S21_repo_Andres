@@ -5,7 +5,7 @@
     qty_textbox_message.innerHTML=errs.join(',');
   }
   function isNonNegInt(string_to_check, returnErrors = false) {
-if (q== ''); q=0;
+
     var errors = []; 
     // This function will return true if string_to_check is a NonNegInt. If returnErrors = true, it will return an array of reasons why it is a NonNegInt. 
     if(Number(string_to_check) != string_to_check) errors.push('Not a number!'); 
@@ -42,12 +42,12 @@ if (q== ''); q=0;
 </head>
 <body>
   <!--Quantity-->
-  <form name="quanity_form" action="" onsubmit="displayPurchase();">
+  <form name="quantity_form" action="display_page_Ex3.html" onsubmit="displayPurchase();" method="GET">
     <label>quantity desried:</label>
     <input name='quantity_textbox' type="text" onkeyup="checkQuantityTextbox(this);">
     <span id='qty_textbox_message'>Enter a quanitity</span>
     <br>
-    <input type="submit" onclick="displayPurchase();" value="Purchase">
+    <input type="submit" value="Purchase">
   </form>
   
 
