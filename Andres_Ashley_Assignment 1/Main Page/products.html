@@ -1,4 +1,22 @@
-<script src="./products.js"></script>
+<!--Products Data-->
+<script src="./products.js">
+
+
+//Add a way where you cannot put in words at all!!!
+function isNonNegInt(q, returnErrors = false) {
+       if (q=='')q=0;
+    var errors = []; 
+    // This function will return true if string_to_check is a NonNegInt. If returnErrors = true, it will return an array of reasons why it is a NonNegInt. 
+    if(Number(q) != q) errors.push('Not a number!'); 
+    // Check if string is a number value
+    if(q < 0) errors.push('Negative value!'); 
+    // Check if it is non-negative
+    if(parseInt(q) != q) errors.push('Not an integer!'); 
+    // Check that it is an integer
+
+    return returnErrors ? errors : (errors.length == 0);
+    }
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +44,14 @@
     <img src=https://i.pinimg.com/736x/af/5d/ae/af5daea0c0412c3967fbed8f08f04a97.jpg>
   </div>
 
-<!--NavBar-->
+  <!--NavBar-->
 <div class="navbar nav_button">
   <div class="navbar_button">
     <a  href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i></i></a>
     <a class="home_button"href="file:///Users/ashleyandres/Documents/GitHub/ITM352_S21_repo_Andres/Andres_Ashley_Assignment%201/Main%20Page/index.html" >Home</a>
     <a href="#" class="shop_button">Shop</a>
-    <!--My buttons in Navbar-->
+
+  <!--My buttons in Navbar-->
     <form action="">
       <label for="gsearch">Search</label>
       <input type="search" id="gsearch" name="gsearch">
@@ -48,21 +67,31 @@
   </div>
    <main> 
       <script>
+        /* Below it will loop the products from products.js using the for loop
+        the <form> part will allow you to add a quantity and purchase it, it will also double check if
+        customers are putting an actual number or not
+        */
              for (i=0; i <= eval("typeof name"+i) != 'undefined'; i++){
         document.write(`
-        <section class="item"> 
+        <section> 
         <img src=${products[i].image}>
         <h2>${products[i].name}</h2> 
         <p> \$${(products[i].price).toFixed(2)}</p>
-        <button type="submit" class = "button">
-        <span data-add-to-cart-text> Add to Cart</span>
-      </button>
+        <form name='quantity' type="text">
+        <label> QTY </label>
+        <input name='txtbox' type="text" onkeyup="checkQuantityTextbox;">
+        <input type="submit" value="Add to Cart">
+        </form>
     </section>
+
+    
         `);
 }
       </script>
+      
   </main>
 </div> 
+<!--Banner on bottom-->
 <footer style="background-color: maroon; text-align: center;color: white;"><h1>Bringing Luck Into Your Year!</h1>
 </footer>
 

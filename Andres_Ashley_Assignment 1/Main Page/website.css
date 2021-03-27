@@ -22,28 +22,28 @@ header {
     float: left;
 }
 img {
+    /*makes those boxes around the images*/
     border: 2px solid #ddd;
     float:center;
     width: 100%;
     max-width: 200px;
     height: 200px;
     margin: 10px 5px 10px 5px;
-    box-sizing: border-box;
+  
+    
 }
 
+/* Will only change the size of the logo, rest of the modification is done in img*/
 .logo img{
     width: 200px;
     height:200px;
 }
-
+/*Looked at PuraVida website as a reference, used same coding to make their products align*/
 main{
     display: flex;
 	flex-flow: wrap;
     justify-content: space-around;
     text-align: center;
-    
-    /* makes stuff centered and pretty */  
-    /* Center makes it more eyecatching */ 
 
 }
 
@@ -55,7 +55,7 @@ main{
 .bracelet{
     background-color: black;
     color: white;
-    text-align: center;
+    text-align: left;
     width: 20%;
     font-size: 25px;
     padding-left: 10px;
