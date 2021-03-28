@@ -1,21 +1,29 @@
 <!--Products Data-->
-<script src="./products.js">
+<script src="./products.js"></script>
 
-
-//Add a way where you cannot put in words at all!!!
+<script>
+//Check for Errors, make sure they are putting valid input
 function isNonNegInt(q, returnErrors = false) {
        if (q=='')q=0;
     var errors = []; 
-    // This function will return true if string_to_check is a NonNegInt. If returnErrors = true, it will return an array of reasons why it is a NonNegInt. 
     if(Number(q) != q) errors.push('Not a number!'); 
-    // Check if string is a number value
     if(q < 0) errors.push('Negative value!'); 
-    // Check if it is non-negative
     if(parseInt(q) != q) errors.push('Not an integer!'); 
-    // Check that it is an integer
 
     return returnErrors ? errors : (errors.length == 0);
     }
+    function checkQuantityTextbox(qtyTextboxObj){
+      errs = isNonNegInt(qtyTextboxObj.value, true);
+      qty_textbox_message.innerHTML=errs.join(' , ');
+    } 
+
+    //display the 
+    function displayPurchase(){
+       if (isNonNegInt(quantity_textbox.value)){
+       }
+      }
+
+
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,9 +85,10 @@ function isNonNegInt(q, returnErrors = false) {
         <img src=${products[i].image}>
         <h2>${products[i].name}</h2> 
         <p> \$${(products[i].price).toFixed(2)}</p>
-        <form name='quantity' type="text">
-        <label> QTY </label>
-        <input name='txtbox' type="text" onkeyup="checkQuantityTextbox;">
+
+        <form name="quantity_form" action="invoice.html" method="GET">
+        <label>QTY</label>
+        <input name='quantity${i}' type="text" onkeyup="checkQuantityTextbox(this);">
         <input type="submit" value="Add to Cart">
         </form>
     </section>
