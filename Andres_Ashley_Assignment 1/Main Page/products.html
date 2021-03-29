@@ -13,9 +13,9 @@ function isNonNegInt(q, returnErrors = false) {
     return returnErrors ? errors : (errors.length == 0);
     }
     function checkQuantityTextbox(qtyTextboxObj){
-      errs = isNonNegInt(qtyTextboxObj.value, false);
-      alert ("No");
-    } 
+       errs = isNonNegInt(qtyTextboxObj.value, true);
+       qty_textbox_message.innerHTML=errs.join(' , ');
+   } 
 
   
   

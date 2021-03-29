@@ -49,11 +49,7 @@ function isNonNegInt(q, returnErrors = false) {
               qty= params.get(`quantity${i}`);
               if (qty==0){ 
                 continue;
-                else (isNonNegInt(qty).value, false); {
-                  windows.location.href = "products.html" + document.location.search;
-                }                
-                //if there is no quanitity go back to the loop to check if there are quantities in the other ones
-              }
+              } 
               extended_price = qty*products[i].price;
               subtotal += extended_price;
               document.write(`
