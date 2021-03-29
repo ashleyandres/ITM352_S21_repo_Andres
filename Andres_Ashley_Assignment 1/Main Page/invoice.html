@@ -2,7 +2,15 @@
 
 <script>
 
+function isNonNegInt(q, returnErrors = false) {
+       if (q=='')q=0;
+    var errors = []; 
+    if(Number(q) != q) errors.push('Not a number!'); 
+    if(q < 0) errors.push('Negative value!'); 
+    if(parseInt(q) != q) errors.push('Not an integer!'); 
 
+    return returnErrors ? errors : (errors.length == 0);
+    }
 
 
 
@@ -41,6 +49,9 @@
               qty= params.get(`quantity${i}`);
               if (qty==0){ 
                 continue;
+                else (isNonNegInt(qty).value, false); {
+                  windows.location.href = "products.html" + document.location.search;
+                }                
                 //if there is no quanitity go back to the loop to check if there are quantities in the other ones
               }
               extended_price = qty*products[i].price;

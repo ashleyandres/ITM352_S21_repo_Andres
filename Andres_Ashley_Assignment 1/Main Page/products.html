@@ -13,15 +13,11 @@ function isNonNegInt(q, returnErrors = false) {
     return returnErrors ? errors : (errors.length == 0);
     }
     function checkQuantityTextbox(qtyTextboxObj){
-      errs = isNonNegInt(qtyTextboxObj.value, true);
-      qty_textbox_message.innerHTML=errs.join(' , ');
+      errs = isNonNegInt(qtyTextboxObj.value, false);
+      alert ("No");
     } 
 
-  windows.onload = function (){
-    if (has_errors){
-      alert ("Please enter only valid quantities");
-    }
-  }
+  
   
 
 
@@ -91,7 +87,7 @@ function isNonNegInt(q, returnErrors = false) {
        
           <label id="quantity${i}_label"}">Quantity</label>
          <input type="text" placeholder="0" name="quantity${i}" onkeyup="checkQuantityTextbox(this);">
-        <input type="submit" value="Purchase!" name="purchase_submit">
+        <input type="submit" value="Purchase!" onclick ="displayPurchase();" name="purchase_submit">
         
     </section>
 
