@@ -16,8 +16,9 @@ function isNonNegInt(q, returnErrors = false) {
 
 
 //Get the quantity from products.html
-      let params = (new URL(document.location)).searchParams;
-
+      var params = (new URL(document.location)).searchParams;
+    
+      
 
 
 </script>
@@ -138,3 +139,21 @@ function isNonNegInt(q, returnErrors = false) {
 </body>
 
 </html>
+<script>
+//validate the data
+    window.onload = function (){
+      //check if they press the submit buttom
+      if (params.has('purchase_submit'));{
+        //quanityt is valid?
+        if (isNonNegInt(params.get(`quantity${i}`))){
+         } 
+         //for invalid error send it back
+         else {
+           window.location.href = "products.html" + document.location.search;
+           alert("Invalid Quantity");
+         }
+
+        
+      }
+    }
+    </script>
