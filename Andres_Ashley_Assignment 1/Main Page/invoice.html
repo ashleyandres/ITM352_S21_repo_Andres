@@ -7,7 +7,7 @@
 
 
 
-      //Get the quantity from products.html
+//Get the quantity from products.html
       let params = (new URL(document.location)).searchParams;
 
 
@@ -39,8 +39,9 @@
             // product rows 
             for (i = 0; i < products.length; i++) {
               qty= params.get(`quantity${i}`);
-              if (qty==0){
+              if (qty==0){ 
                 continue;
+                //if there is no quanitity go back to the loop to check if there are quantities in the other ones
               }
               extended_price = qty*products[i].price;
               subtotal += extended_price;

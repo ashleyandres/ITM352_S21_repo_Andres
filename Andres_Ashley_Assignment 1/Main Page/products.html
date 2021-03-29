@@ -17,7 +17,11 @@ function isNonNegInt(q, returnErrors = false) {
       qty_textbox_message.innerHTML=errs.join(' , ');
     } 
 
-  
+  windows.onload = function (){
+    if (has_errors){
+      alert ("Please enter only valid quantities");
+    }
+  }
   
 
 
