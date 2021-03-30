@@ -1,7 +1,15 @@
 <!--Products Data-->
 <script src="./products.js" type="text/javascript"></script>
-
 <script>
+  var store_name = " Ashley Andres";
+  first_name = 'Ashley';
+  last_name = 'Andres'
+  var now = new Date();
+  var over_half = false
+
+</script>
+<script>
+  
   //Check for Errors, make sure they are putting valid input
   function isNonNegInt(q, returnErrors = false) {
     if (q == '') q = 0;
@@ -101,17 +109,34 @@
 
   </div>
   <!--Banner on bottom-->
-  <footer style="background-color: maroon; text-align: center;color: white;">
-    <h1>Bringing Luck Into Your Year!</h1>
+  <footer >
+    
+    <h1 style="background-color: maroon; text-align: center;color: white;">
+      Bringing Luck Into Your Year!
+      <br>
+      <input type="submit" value="Purchase!" name="purchase_submit"></h1>
 
   <!--Purchase Button-->
-    <input type="submit" value="Purchase!" name="purchase_submit">
+    
   </footer>
+  <script>
+      line=0
+      now - new Date();
+  document.write(`
+      <table border="1" style="margin-left: auto; margin-right: auto; text-align: center; width:100%;">
+          <tr><th colspan="2"><h1>Feng Shui - ${first_name[0] + '.' +last_name[0] + '.'}'s</h1></th></tr>
+          <tr><td>${++line}</td><td><br />Copyright @ ${first_name + last_name}<fullname> </td></tr>
+          <tr><td>${++line}</td><td>${now.getFullYear()}</td></tr>
+          <tr><td>${++line}</td><td>${(now.getHours() +11) %12 +1  + ':' + now.getMinutes()} ${(now.getHours()<12) ? "AM" : "PM" } </td></tr>
+      </table>
+      `);
+      </script>
   </form>
 </body>
 
 </html>
 <script>
+  //Reference Office Hours with Professor Port
   //Get the quantity from products.html
   var params = (new URL(document.location)).searchParams;
   //validate the data when the window loads
