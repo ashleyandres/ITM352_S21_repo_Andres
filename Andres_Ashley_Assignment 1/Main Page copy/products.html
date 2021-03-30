@@ -50,22 +50,26 @@
 
 <body>
 
-
-
+<div class="navbar">
+        <a class="home_button"
+          href="http://127.0.0.1:8080/" style="padding-right: 20px;">Home</a>
+        <a href="#products" class="shop_button">Shop</a>
+    </div>
+<br>
   <!--PageBanner-->
   <header class=>
+    
+    <!--NavBar-->
+    
+    <div>
     <h1> Feng Shui</h1>
+    </div>
 
     <div class="logo">
       <img src=https://i.pinimg.com/736x/af/5d/ae/af5daea0c0412c3967fbed8f08f04a97.jpg>
     </div>
 
-    <!--NavBar-->
-    <div class="navbar nav_button">
-      <div class="navbar_button">
-        <a class="home_button"
-          href="http://127.0.0.1:8080/">Home</a>
-        <a href="#products" class="shop_button">Shop</a>
+    
 
      
        
@@ -89,8 +93,8 @@
           for (i = 0; i < products.length; i++) {
             document.write(`
         <section class="item card-4"> 
-        <img src=${products[i].image}>
-        <h2>${products[i].name}</h2> 
+        <img src=${products[i].image} >
+        <h2 style="text-alight:right;">${products[i].name}</h2> 
         <p> \$${(products[i].price).toFixed(2)}</p>
        
           <label id="quantity${i}_label"}">Quantity</label>
@@ -123,7 +127,7 @@
       line=0
       now - new Date();
   document.write(`
-      <table border="1" style="margin-left: auto; margin-right: auto; text-align: center; width:100%;">
+      <table border="1" style="margin-left: auto; text-align: center; width:100%;">
           <tr><th colspan="2"><h1>Feng Shui - ${first_name[0] + '.' +last_name[0] + '.'}'s</h1></th></tr>
           <tr><td>${++line}</td><td><br />Copyright @ ${first_name + last_name}<fullname> </td></tr>
           <tr><td>${++line}</td><td>${now.getFullYear()}</td></tr>
