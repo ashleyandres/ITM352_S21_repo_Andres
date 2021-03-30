@@ -55,32 +55,28 @@
     <!--NavBar-->
     <div class="navbar nav_button">
       <div class="navbar_button">
-        <a href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i></i></a>
         <a class="home_button"
-          href="file:///Users/ashleyandres/Documents/GitHub/ITM352_S21_repo_Andres/Andres_Ashley_Assignment%201/Main%20Page/index.html">Home</a>
-        <a href="#" class="shop_button">Shop</a>
+          href="http://127.0.0.1:8080/">Home</a>
+        <a href="#products" class="shop_button">Shop</a>
 
-        <!--My buttons in Navbar-->
-        <form action="">
-          <label for="gsearch">Search</label>
-          <input type="search" id="gsearch" name="gsearch">
-          <input type="submit" value="Submit">
-        </form>
-      </div>
+     
+       
+       
+     
 
   </header>
 
-  <div class="products">
+  <div id="products">
     <div class="bracelet">
-      <h2>Bracelets</h2>
+      <h2>Bracelets</h2></div>
     </div>
+    <!--Form that will hold all the data below and keep the names and ids with it-->
     <form name="product_selection_form" action="" method="GET">
       <main>
 
         <script>
-          /* Below it will loop the products from products.js using the for loop
-          the <form> part will allow you to add a quantity and purchase it, it will also double check if
-          customers are putting an actual number or not
+          /* Below it will loop the products from products.js 
+          inserted a textbox that will hold the quantity that is inputted
           */
           for (i = 0; i < products.length; i++) {
             document.write(`
@@ -96,9 +92,8 @@
         
         
     </section>
-
-    
         `);
+        //span will only appear a message when an invalid quantity has been inputted --> look at CheckQuantityTextbox function to see what is going on
           }
         </script>
 
@@ -108,6 +103,8 @@
   <!--Banner on bottom-->
   <footer style="background-color: maroon; text-align: center;color: white;">
     <h1>Bringing Luck Into Your Year!</h1>
+
+  <!--Purchase Button-->
     <input type="submit" value="Purchase!" name="purchase_submit">
   </footer>
   </form>
@@ -117,32 +114,43 @@
 <script>
   //Get the quantity from products.html
   var params = (new URL(document.location)).searchParams;
-  //validate the data
+  //validate the data when the window loads
   window.onload = function () {
     //check if they press the submit buttom
     if (params.has('purchase_submit')) {
+
+      //start off with no errors --> use this as a holder for future invalid errors
       has_errors = false;
+      //start off with no quantity --> use this to detect if there is a quantity
       has_quantities = false;
+      //loop all the text boxes to check for invalid errors
       for (i = 0; i < products.length; i++) {
+        //telling where to look for the invalid error in the code
         product_selection_form[`quantity${i}`].value = params.get(`quantity${i}`);
         checkQuantityTextbox(product_selection_form[`quantity${i}`]);
-        //quanityt is valid?
+
+        //quanityt invalid?
         if (!isNonNegInt(params.get(`quantity${i}`))) {
-          //for invalid error send it back
+          //Tells the computer that it is --> speaking to it
           has_errors = true;
         }
+        //is there an actuallt quantity inputted?
         if (params.get(`quantity${i}`) > 0) {
+        //Tells computer that there is --> speaking to it
           has_quantities = true;
         }
 
 
       }
+      //Tells computer what to do when there is errors
       if (has_errors) {
         alert("Please choose valid quantities");
       }
+      //Tells computer what to do when there is no quantities
         else if(!has_quantities){
           alert("Choose some products");
         }
+        //Tells computer that it did not meet the above conditions (its valid) therefore send it to the invoice.html page 
       else {
           window.location.href = "invoice.html" + document.location.search;
         }
