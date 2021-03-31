@@ -1,8 +1,9 @@
 body {
     Font-family:"times new roman";
-    color: black;
+    color: white;
     background-color: rgb(255, 255, 255);
     font-size: 20px;
+    background-image:url("https://wallpapercave.com/wp/wp2540360.jpg");
     
    
 }
@@ -11,7 +12,8 @@ h1,h2, .navbar{
     font-size: inherit;
 }
 header {
-    background-color: maroon;
+    background-image:url("https://wallpapercave.com/wp/wp2540360.jpg");
+    fill-opacity: 50%;
     color: white;
     font-size: 35px;
     text-align: center;
@@ -40,7 +42,7 @@ img {
 }
 /*Looked at PuraVida website as a reference, used same coding to make their products align*/
 main{
-    display: flex;
+    display: column;
 	flex-flow:wrap;
     justify-content: space-around;
     text-align: left;
@@ -76,7 +78,7 @@ main{
 /*creates the shadow like boxes, reference from w3 school example*/
 .card-4{
 box-shadow:0 4px 10px 0 
- rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);
+ rgb(255, 255, 255),0 4px 20px 0 rgba(255, 255, 255, 0.19);
  padding: 10px;
  margin-bottom: 10px;
  margin-top: 5px;
@@ -84,7 +86,7 @@ box-shadow:0 4px 10px 0
 }
 /*creates the shadow box and nav section on the top*/
 .navbar {
-   float:left ;
+   float:left;
    background-color: maroon;
    width:100%;
    height: 40px;
