@@ -1,3 +1,4 @@
+/*
 var express = require('express');
 var app = express();
 
@@ -8,9 +9,22 @@ app.get('/test', function (request, response, next) {
     next(); //executes after the above is execute
 });
 app.all('*', function (request, response, next) {
-    response.send(request.method + ' to path ' + request.path + 'with query' +request.query);
+    response.send(request.method + ' to path ' + request.path + 'with query' + request.query);
 });
 app.listen(8080, function (){
     console.log('listening on port 8080')
 } 
 );// note the use of an anonymous function here
+*/
+
+var express = require('express');
+var app = express();
+app.get('/test', function (request, response, next) {
+    console.log('issavibe');
+    next();
+});
+app.all('*', function (request, response, next) {
+    response.send(request.method + ' to path ' + request.path);
+    
+});
+app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here
