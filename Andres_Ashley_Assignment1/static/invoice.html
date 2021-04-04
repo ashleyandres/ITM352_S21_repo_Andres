@@ -31,13 +31,17 @@
   <title>Invoice</title>
 </head>
 <body>
+    <h1>FENG SHUI 
+        <br>
+        INVOICE</h1>
+    <!--Reference to Invoice4 WOD-->
   
-  <table border =""  style=" justify-content: space-evenly;" > <!--Makes the table in the center-->
+  <table border="1px" style=" justify-content: space-evenly;" > <!--Makes the table in the center-->
     <tbody>
       <tr>
-        <th width="50%">Item</th>
-        <th width="11%">Quantity</th>
-        <th width="13%">Price</th>
+        <th width="50%">ITEM</th>
+        <th width="11%">QTY</th>
+        <th width="13%">PRICE</th>
         <th width="54%">Extended price</th>
       </tr>
       <script>
@@ -72,6 +76,7 @@
   var tax = tax_rate * subtotal;
 
   //Shipping
+  //Modified shipping prices
   if (subtotal >= 50) { //items over $20 gets free shipping
     shipping = 0;
   }
@@ -111,7 +116,7 @@
 </tr>
 <tr>
   <td style="text-align: center;" colspan="3" width="67%">
-    <strong=>Total</strong>
+    <strong=>TOTAL</strong>
   </td>
   <td width="54%">$<strong>
       <script>document.write(total.toFixed(2));</script>
@@ -120,9 +125,11 @@
 </tbody>
 </table>
 <footer><b>
-OUR SHIPPING POLICY IS:Free Shipping on Orders Over $50
+OUR SHIPPING POLICY IS:
 <br>
-Shipping fee will be 10% of total purchase plus tax </b>
+Shipping fee will be 10% of total purchase plus tax
+<br>Free Shipping on Orders Over $50
+ </b>
 </footer>
 </body>
 

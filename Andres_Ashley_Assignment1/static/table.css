@@ -1,19 +1,31 @@
+body {
+    background-image: url("https://wallpapercave.com/wp/wp2540360.jpg");
+    color: white;
+}
 /*Style reference from sparksuite
 styles just the body of the table*/
 table {
+    color: white;
     max-width:800px;
     margin:auto;
     padding:30px;
-    border:1px solid #eee;
+    border:2px solid #eee;
     box-shadow:0 0 10px rgba(0, 0, 0, .15);
     font-size:16px;
     line-height:24px;
     font-family:'Times New Roman', 'Helvetica', Helvetica, Arial, sans-serif;
-    color:#555;
+    background-color:maroon;
+    
 }
 
 footer{
     max-width:900px;
     margin:auto;
-   vertical-align:bottom;
+   text-align: center;
+   margin-top: 10px;
+}
+h1{
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 35px;
 }
