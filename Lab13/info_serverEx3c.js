@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var myParser = require("body-parser");
+app.use(myParser.urlencoded({ extended: true }));
 
 
 
@@ -10,7 +12,12 @@ app.all('*', function (request, response, next) {
 });
 
 app.get('/test', function (request, response, next) {
-  response.send ('I got a request for /test');
+  response.send ('I got a POST request for /test');
+});
+
+app.post('/display_purchase.html', function (request, response, next) {
+  post_data = request.body;
+  response.send (post_data);
 });
 
 app.use(express.static('./public'));
