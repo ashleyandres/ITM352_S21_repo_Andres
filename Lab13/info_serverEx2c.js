@@ -9,14 +9,20 @@ app.all('*', function (request, response, next) {
     
 });
 
-app.get('/test', function (request, response, next) {
+app.get('/index.html', function (request, response, next) {
   response.send ('I got a request for /test');
+});
+
+app.post ('/process_login', function (request, response, next){
+  post_data = request.body;
+  response.send(post_data); //check if the password is valid
 });
 
 app.use(express.static('./public'));
 
 
 
-app.listen(8080, () => console.log(`listening on port 8080`)); // note the use of an anonymous function here
+app.listen(8080, () => console.log(`listening on port 8080`));
+ // note the use of an anonymous function here
 
 

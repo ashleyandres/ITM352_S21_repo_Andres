@@ -4,44 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Login Page</title>
     <!--StyleSheets-->
     <link rel="stylesheet" href="signin.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Times+New+Roman|Oswald|Open+Sans">
 </head>
-<body>
+<body >
     <header >
         <img src =https://i.pinimg.com/736x/af/5d/ae/af5daea0c0412c3967fbed8f08f04a97.jpg style="width: 50px; height: 50px;">
     </header>
-    
-    <form class ="login" action="./process_register" method="POST">
-    <div class="container">
-    <h1> New User Registration</h1>
-    <p>Please Fill in this form to create an account</p>
-    <hr>
-    <label for= "firstname"> <b>First Name</b></label>
-    <input type="text" placeholder="Enter First Name" name="firstname" id="firstname" required>
 
-    <label for= "lastname"> <b>Last Name</b></label>
-    <input type="text" placeholder="Enter Last Name" name="lastname" id="lastname" required>
+    <form class ="login" action="process_login" method="POST"></form>
+    <div class="container">
+    <h1> Log In</h1>
+    <hr>
 
     <label for= "email"> <b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
-    <label for= "username"> <b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" id="username" required>
-
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
-    <hr>
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-    <button type="submit" class="registerbtn">Register</button>
+    <button type="submit" class="registerbtn">Sign In</button>
   </div>
   
  
-</div>
-</form>
+  </div>
 </body>
 </html>

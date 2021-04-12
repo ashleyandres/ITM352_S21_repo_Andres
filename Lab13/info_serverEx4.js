@@ -1,3 +1,11 @@
+var products = require('./product_data.json');
+
+app.get("/product_data.js", function (request, response, next) {
+   var products_str = `var products = ${JSON.stringify(products)};`;
+   response.send(products_str);
+});
+
+function process_quantity_form (POST, response){
 var express = require('express');
 var app = express();
 var myParser = require("body-parser");
@@ -15,20 +23,12 @@ app.all('*', function (request, response, next) {
 });
 
 
-app.post ('/process_login', function (request, response, next){
-  user_data = {'username':'itm352', 'password':'grader'};
-  post_data = request.body;
-  if (post_data ['quantity_textbox']){
-    the_qty = post_data ['quantity_textbox']
-    if(user_data['username']== post_data['email']){
-    response.redirect ('invoice.html?quantity_textbox='+the_qty) ;
-    } else {
-      response.redirect('./order_page.html? quantity_textbox='+the_qty);
-      return;
-    }
-  }
+app.post(process_quantity_form(request.body, response));{
+let model = products[0]['model'];
+let model_price = products[0]['price'];
+
+}; 
   
-});
 app.use(express.static('./public')); //request to no file, automatically will look for index.html
 
 
@@ -48,4 +48,5 @@ function checkQuantityTextbox(qtyTextboxObj) {
   if (parseInt(q) != q) errors.push('Not an integer!');
 
   return returnErrors ? errors : (errors.length == 0);
+}
 }
