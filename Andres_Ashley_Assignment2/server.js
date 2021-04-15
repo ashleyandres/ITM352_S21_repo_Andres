@@ -4,7 +4,8 @@ var express = require('express');// a middle-ware to help load the page
 var app = express();
 var myParser = require("body-parser"); // utlizes the middleware body-parser and allows anything to POST any data that allows it
 var qs = require('qs');
-var products = require('./static/products.js');
+var products = require('./user_data.json');
+console.log(name)
 
 //user data holder for now
 var users_reg_data = {
@@ -17,51 +18,36 @@ app.all('*', function (request, response, next) {
     console.log(request.method + ' to ' + request.path);
     next();
 
-})
-app.use(myParser.urlencoded({ extended: true })); // load my url that is encoded
-
-//Process of Login
-app.post('/process_login', function (request, response, next) {
-    //match username and passowrd in database
-
-    //all good, send to invoice
-    request.query ["purchased"]="true";
-    request.query ["username"]=request.body["username"];
-    response.redirect('invoice.html?' +qs.stringify(request.query));
 });
 
-//Process of Registration
-app.post('/process_register', function (request, response, next) {
-    //match username and passowrd in database
-});
-
-
-//Processing the Purchase [IN THE WORKS!!! Fix Algorithm]
-app.post('/process_purchase', function (request, response, next) {
-   let POST = request.body; //loads the body of the page
-   if (typeof POST ['purchase_submit'] != 'undefined'){
-        var has_errors = false;
-        var has_quantities = false;
-       for (i = 0; i < products.length; i++) {
-        
-        qty=POST[`quantity${i}`];
-        has_errors = has_quantities|| qty > 0; //value is inputed and says it is greater than 0
-        has_errors = has_quantities && isNonNegInt(qty); //valid quantity
-}
-        // if all quantities are valid, generate the invoice Ref. Alyssa Mencel code. Looks simple and easy to understand
-        if (has_errors && has_quantities) { // qualifies as a valid quantity then redirect to login page
-          response.redirect("./login.html?"+ stringified);
-          return; //stops the function 
-        }  
-        // does not pass the valid quantity test? send back to the products page.
-        else { 
-            response.redirect("./products_display.html?" + stringified) 
+app.post('/process_login', function (request, response, next){ 
+    console.log(request.query);
+    //vaildate username
+    user_data ={'username': 'itm352', 'password': 'grader'};
+    post_data = request.body;
+    if (post_data['username']){
+        the_username = post_data['username'];
+        if(user_data['username']== post_data['username']){
+            response.send(`Thanks ${the_username}!`);
+            return;
         }
-       }
+        else {
+            response.send(`bad ${the_username}!`);
+            return;
+        }
+    }
+    //validate password
+
+    //good to go? go to invoice.html
+    request.query["purchased"]= "true"
+    request.query["username"]=request.body["username"]
+    response.redirect('invoice.html?'+ qs.stringify(request.query));
 });
- // variables that assume no errors
+//Process registration
+app.post('/process_register')
 
-
+//Process purchase
+app.post ('/process_form')
 app.use(express.static('./static'));
 app.listen(8080, () => console.log(`listening on port 8080`));
 
@@ -75,4 +61,8 @@ function isNonNegInt(q, returnErrors = false) {
     if (parseInt(q) != q) errors.push('Not an integer!');
 
     return returnErrors ? errors : (errors.length == 0);
+}
+function checkQuantityTextbox(qtyTextboxObj) {
+    errs = isNonNegInt(qtyTextboxObj.value, true);
+    document.getElementById(qtyTextboxObj.name + "_message").innerHTML = errs.join(' , ');
 }

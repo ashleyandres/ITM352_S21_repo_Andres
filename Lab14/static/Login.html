@@ -7,14 +7,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    let params = (new URL(document.location)).searchParams;
-    window.onload = function () {
-        if (params.has('LogError')) {
-            alert('Invalid Username or Password');
-        }
-    }
-</script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +17,7 @@
 </head>
 <body >
   <script>
-    document.write( `<form class ="login" action="process_login" method="POST">`)
+    document.write( `<form class ="login" action="/process_login${location.search}" method="POST">`)
   </script>
     <header >
         <img src =https://i.pinimg.com/736x/af/5d/ae/af5daea0c0412c3967fbed8f08f04a97.jpg style="width: 50px; height: 50px;">
@@ -37,7 +29,7 @@
     <hr>
 
     <label for= "username"> <b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username_txtbox" id="username" required>
+    <input type="text" placeholder="Enter Username" name="username" id="username" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
@@ -57,6 +49,3 @@
 </form>
 </body>
 </html>
-<script> 
-  login.action += document.location.search; // Saves query string from my products page for the invoice (Borrowed from Prof. Port)
-</script>
