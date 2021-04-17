@@ -10,12 +10,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Times+New+Roman|Oswald|Open+Sans">
 </head>
 <body>
+    
     <header >
         <img src =https://i.pinimg.com/736x/af/5d/ae/af5daea0c0412c3967fbed8f08f04a97.jpg style="width: 50px; height: 50px;">
     </header>
-    
-    <form class ="login" action="./process_register" method="POST">
-    <div class="container">
+   
+    <div class="container"> <script>
+        document.write( `<form class ="login" action="process_registration${location.search}" method="POST">`)
+      </script>
     <h1> New User Registration</h1>
     <p>Please Fill in this form to create an account</p>
     <hr>

@@ -57,9 +57,9 @@
             else if (!has_quantities) {
                 alert(" Please select some products");
             }
-            //Tells computer that it did not meet the above conditions (its valid) therefore send it to the Login.html page 
+            //Tells computer that it did not meet the above conditions (its valid) therefore send it to the invoice.html page 
             else {
-                window.location.href = "invoice.html" + document.location.search;
+                window.location.href = "Login.html" + document.location.search;
             }
 
         }
@@ -104,7 +104,7 @@
 
 
 <!--Form that will hold all the data below and keep the names and ids with it-->
-<form name="product_selection_form" action="./process_purchase" method="POST">
+<form name="product_selection_form" action="/process_purchase" method="POST">
     <main>
 
         <script>

@@ -36,7 +36,7 @@ app.all('*', function (request, response, next) {
     console.log(request.method + ' to ' + request.path);
     next();
 
-})
+});
 
 
 //Process of Login
@@ -46,10 +46,22 @@ app.post('/process_login', function (request, response, next) {
     let passoword_entered = request.body["psw"];
     if (typeof user_data[username_entered] != 'undefined') {
         if (user_data[username]['password'] == password_entered);
-        response.send (`${username_entered}is logged in`)
+        response.send(`${username_entered}is logged in`);
+        //use this for assignment2
+        //response.redirect ()
     } else {
-        response.send (`${username_entered}not found`)
+        response.send(`${username_entered}not found`);
     }
+
+    //add a new user to the DB
+    username = 'newuser';
+    user_data[username] = {};
+    user_data[username].password = 'newpass';
+    user_data[username].email = 'newuser@user.com';
+    //save updated user data to file
+    fs.writeFileSync(user_data_file, JSON.stringify(user_data));
+
+
     //match username and passowrd in database; credentials
 
     //check  username
@@ -73,6 +85,12 @@ app.post('/process_login', function (request, response, next) {
 
 //Process of Registration
 app.post('/process_register', function (request, response, next) {
+    username = 'newuser';
+    user_data[username] = {};
+    user_data[username].password = 'newpass';
+    user_data[username].email = 'newuser@user.com';
+    //save updated user data to file
+    fs.writeFileSync(user_data_file, JSON.stringify(user_data));
     //match username and passowrd in database
 });
 

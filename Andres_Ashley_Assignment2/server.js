@@ -1,18 +1,27 @@
-// Referencve from Assgnment 2 Example, Lab 13, and Lab14 examples. Used Alyssa Mencel [Fall2020] Assgnment 2 server.js to understand what each code meant --> another way of explaining the code and their functions
-
-var express = require('express');// a middle-ware to help load the page
+var express = require('express');
 var app = express();
-var myParser = require("body-parser"); // utlizes the middleware body-parser and allows anything to POST any data that allows it
-var qs = require('qs');
-var products = require('./user_data.json');
-console.log(name)
+var myParser = require("body-parser");
+var qs = require('qs');  //reads through the JSON object
+var products = require('./static/products.js'); //loads my products
+var user_data_file = require('./user_data.json');
+var fs = require('fs'); //to read the files
+app.use(myParser.urlencoded({ extended: true })); // load my url that is encoded
 
-//user data holder for now
-var users_reg_data = {
-    "dport": { "name": "Dan Port", "password": "portspassword", "email": "dport@hawaii.edu" },
-    "kazman": { "name": "Rick Kazman", "password": "kazmanpassword", "email": "kazman@hawaii.edu" },
-    "itm352": { "name": "ITM 352", "password": "grader", "email": "itm352@hawaii.edu" }
-};
+//Reference to 4/13/21 lecture Lab 13
+var filename = './user_data.json' //gives filename a variable
+
+//Check if a file exsist and how big it is
+if (fs.existsSync(filename)) {
+    var stats = fs.statSync(filename);
+    console.log(`${filename} has ${stats["size"]}characters`); //gives us character count of the file
+    var user_data = JSON.parse(fs.readFileSync('./user_data.json', 'utf-8'));
+} else {
+    console.log(`${user_data_file} does not exsist`);
+}
+
+//Read User data file
+
+
 //any request methods 
 app.all('*', function (request, response, next) {
     console.log(request.method + ' to ' + request.path);
@@ -20,39 +29,73 @@ app.all('*', function (request, response, next) {
 
 });
 
-app.post('/process_login', function (request, response, next){ 
-    console.log(request.query);
-    //vaildate username
-    user_data ={'username': 'itm352', 'password': 'grader'};
-    post_data = request.body;
-    if (post_data['username']){
-        the_username = post_data['username'];
-        if(user_data['username']== post_data['username']){
-            response.send(`Thanks ${the_username}!`);
-            return;
-        }
-        else {
-            response.send(`bad ${the_username}!`);
-            return;
-        }
-    }
-    //validate password
+//--------------Process_Login---------------//
+//Reference to 4/13/21 Lecture
 
-    //good to go? go to invoice.html
-    request.query["purchased"]= "true"
-    request.query["username"]=request.body["username"]
-    response.redirect('invoice.html?'+ qs.stringify(request.query));
+app.post('/process_login', function (request, response, next) {
+    console.log(request.body);
+
+    //Variables
+    var error =[];
+    let username_entered = request.body["username"];
+    let password_entered = request.body["psw"];
+
+    //---Check Login---//
+    //check if the username is valid
+    if (typeof user_data[username_entered] != 'undefined'){
+        //check if it matches with password
+        if(user_data[username_entered]['password']== password_entered){
+        //what to do if it is all validated
+            response.send('okay');
+
+        //wrong password?
+        } else {
+           error.push("bad");
+        }
+
+
+        //wrong username?
+        } else {
+            alert('Incorrect Username');
+        }
+        
+
+
+    //All good, send to the invoice
+    request.query["purchase_submit"] = "true";
+    request.query["username"] = request.body["username"];
+    response.redirect('invoice.html?' + qs.stringify(request.query));
+
 });
-//Process registration
-app.post('/process_register')
 
-//Process purchase
-app.post ('/process_form')
+
+//------------Process_Registration--------//
+
+
+app.post('process_registration', function (request, response) {
+
+});
+
+//Adding a new user
+username= 'newuser'
+user_data[username]= {};
+user_data[username].password = "newpass";
+user_data[username].email ='newuser@user.com';
+user_data[username].name ='Ashley Andres';
+
+//save the updated user data to the file
+fs.writeFileSync(user_data_file, JSON.stringify(user_data));
+
+//----------Process_Purchase-----------//
+app.post('process_purchase', function (request, response) {
+
+});
+
+
 app.use(express.static('./static'));
 app.listen(8080, () => console.log(`listening on port 8080`));
 
-
-//Check for Errors, make sure they are putting valid input
+//Validation code borrowed from Assign.1
 function isNonNegInt(q, returnErrors = false) {
     if (q == '') q = 0;
     var errors = [];
@@ -62,7 +105,13 @@ function isNonNegInt(q, returnErrors = false) {
 
     return returnErrors ? errors : (errors.length == 0);
 }
+//Validation for the username and password
 function checkQuantityTextbox(qtyTextboxObj) {
     errs = isNonNegInt(qtyTextboxObj.value, true);
     document.getElementById(qtyTextboxObj.name + "_message").innerHTML = errs.join(' , ');
 }
+
+//if (post_data('username')){
+   // quantity_form['username'].value = params.get('username');
+  //  checkQuantityTextbox(quantity_form['quantity_textbox']);
+//}

@@ -33,7 +33,7 @@
 <body>
     <h1>FENG SHUI 
         <br>
-        INVOICE</h1>
+        Reciept</h1>
     <!--Reference to Invoice4 WOD-->
   
   <table border="1px" style=" justify-content: space-evenly;" > <!--Makes the table in the center-->
@@ -124,7 +124,13 @@
 </tr>
 </tbody>
 </table>
+
+
 <footer><b>
+  <!--Personalized Reciept-->
+  <script>
+  document.write (`<h1>Thank You for Your order ${params.get('username')}!</h1>`);
+  </script>
 OUR SHIPPING POLICY IS:
 <br>
 Shipping fee will be 10% of total purchase plus tax
