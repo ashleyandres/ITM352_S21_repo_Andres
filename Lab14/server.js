@@ -1,131 +1,102 @@
-// Referencve from Assgnment 2 Example, Lab 13, and Lab14 examples. Used Alyssa Mencel [Fall2020] Assgnment 2 server.js to understand what each code meant --> another way of explaining the code and their functions
-
-var express = require('express');// a middle-ware to help load the page
+var express = require('express');
 var app = express();
-var myParser = require("body-parser"); // utlizes the middleware body-parser and allows anything to POST any data that allows it
-var qs = require('qs'); //query string
-app.use(myParser.urlencoded({ extended: true })); // load my url that is encoded
-//user_data = require ('.user_data.json')
-var fs = require('fs'); //file system
-
-
-//user_data = require('./user_data.json');
-//console.log(user_data['dport']['password']);
-
-//Read user data file
-var user_data_file = './user_data.json';
-if (fs.existsSync(user_data_file)) {
-    var file_stats = fs.statSync(user_data_file);
-    //console.log(file_stats);
-    var user_data = JSON.parse(fs.readFileSync(user_data_file, 'utf-8'));
-} else {
-    // console.log(`${user_data_file}does not exsist`);
-}
-
-//read it as a string, same thing a require would do, parse makes it into an object, use this if you want to read it line by line
-console.log(typeof user_data);
-
-
-
-
-
-
-
+var myParser = require("body-parser");
+var qs = require('qs');  //reads through the JSON object
+var products = require('./static/products.js'); //loads my products
+//var user_data_file = require('./user_data.json');
+var fs = require('fs'); //to read the files
 //any request methods 
+app.use(myParser.urlencoded({ extended: true })); // load my url that is encoded
+
+
 app.all('*', function (request, response, next) {
     console.log(request.method + ' to ' + request.path);
     next();
 
 });
 
+//Reference to 4/13/21 lecture Lab 13
+const { response, request } = require('express');
+var user_data_file = './user_data.json';
+if (fs.existsSync(user_data_file)){
+    var file_stats = fs.statSync(user_data_file);
+    console.log(file_stats["size"]);
+    var user_data = JSON.stringify (fs.readFileSync('./user_data.json', 'utf-8')); // read the file line by line
+} else {
+    console.log(`${user_data_file}`)
+}
 
-//Process of Login
+
+
+
+
+   
+//--------------Process_Login---------------//
+//Reference to 4/13/21 Lecture, Lab 13
+
 app.post('/process_login', function (request, response, next) {
     console.log(request.body);
+
+    //Variables
+    var error =[];
     let username_entered = request.body["username"];
-    let passoword_entered = request.body["psw"];
-    if (typeof user_data[username_entered] != 'undefined') {
-        if (user_data[username]['password'] == password_entered);
-        response.send(`${username_entered}is logged in`);
-        //use this for assignment2
-        //response.redirect ()
-    } else {
-        response.send(`${username_entered}not found`);
-    }
+    let password_entered = request.body["password"];
 
-    //add a new user to the DB
-    username = 'newuser';
-    user_data[username] = {};
-    user_data[username].password = 'newpass';
-    user_data[username].email = 'newuser@user.com';
-    //save updated user data to file
-    fs.writeFileSync(user_data_file, JSON.stringify(user_data));
+    //---Check Login---//
+    //check if the username is valid
+    if (typeof user_data[username_entered] != 'undefined'){
+        //check if it matches with password
+        if(user_data[username_entered]['password']== password_entered){
+        //what to do if it is all validated
+            response.send('okay');
+
+        //wrong password?
+        } else {
+           error.push("bad");
+        }
 
 
-    //match username and passowrd in database; credentials
-
-    //check  username
-
-    //validate username
-
-    //check password
-
-    //check if they match
-
-    //no good, tell them its bad
+        //wrong username?
+        } else {
+            alert('Incorrect Username');
+        }
+        
 
 
-
-    //they match allgood, send to invoice
-    request.query["purchased"] = "true";
+    //All good, send to the invoice
+    request.query["purchase_submit"] = "true";
     request.query["username"] = request.body["username"];
     response.redirect('invoice.html?' + qs.stringify(request.query));
 
 });
 
-//Process of Registration
-app.post('/process_register', function (request, response, next) {
-    username = 'newuser';
-    user_data[username] = {};
-    user_data[username].password = 'newpass';
-    user_data[username].email = 'newuser@user.com';
-    //save updated user data to file
-    fs.writeFileSync(user_data_file, JSON.stringify(user_data));
-    //match username and passowrd in database
+
+//------------Process_Registration--------//
+
+
+app.post('/process_registration', function (req, res) {
+
 });
 
+//Adding a new user, 
+//Used Lab 14 as foundation, and reference Alyssa Mencel's A2 to help modify --> more for the posting parts
+// Borrowed and modified from Lab 14 // 
+    // If errors are present, log the user into the console, redirect to registration page
+username = 'newuser';
+user_data[username] = {};
+user_data[username].password = 'newpass';
+user_data[username].email ='newuser@user.com';
+user_data[username].name = 'Ashley Andres';
 
-//Processing the Purchase [IN THE WORKS!!! Fix Algorithm]
-app.post('/process_purchase', function (request, response, next) {
-    let POST = request.body; //loads the body of the page
-    if (typeof POST['purchase_submit'] != 'undefined') {
-        var has_errors = false;
-        var has_quantities = false;
-        for (i = 0; i < products.length; i++) {
 
-            qty = POST[`quantity${i}`];
-            has_errors = has_quantities || qty > 0; //value is inputed and says it is greater than 0
-            has_errors = has_quantities && isNonNegInt(qty); //valid quantity
-        }
-        // if all quantities are valid, generate the invoice Ref. Alyssa Mencel code. Looks simple and easy to understand
-        if (has_errors && has_quantities) { // qualifies as a valid quantity then redirect to login page
-            response.redirect("./login.html?" + stringified);
-            return; //stops the function 
-        }
-        // does not pass the valid quantity test? send back to the products page.
-        else {
-            response.redirect("./products_display.html?" + stringified)
-        }
-    }
-});
-// variables that assume no errors
+//save the updated user data to the file
+
 
 
 app.use(express.static('./static'));
 app.listen(8080, () => console.log(`listening on port 8080`));
 
-
-//Check for Errors, make sure they are putting valid input
+//Validation code borrowed from Assign.1
 function isNonNegInt(q, returnErrors = false) {
     if (q == '') q = 0;
     var errors = [];
@@ -135,3 +106,13 @@ function isNonNegInt(q, returnErrors = false) {
 
     return returnErrors ? errors : (errors.length == 0);
 }
+//Validation for the username and password
+function checkQuantityTextbox(qtyTextboxObj) {
+    errs = isNonNegInt(qtyTextboxObj.value, true);
+    document.getElementById(qtyTextboxObj.name + "_message").innerHTML = errs.join(' , ');
+}
+
+//if (post_data('username')){
+   // quantity_form['username'].value = params.get('username');
+  //  checkQuantityTextbox(quantity_form['quantity_textbox']);
+//}
