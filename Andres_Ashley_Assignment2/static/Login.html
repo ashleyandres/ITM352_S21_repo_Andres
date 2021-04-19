@@ -1,16 +1,12 @@
-<script>
-      //Get the quantity from products.html
-  var params = (new URL(document.location)).searchParams;
 
-  window.onload
-</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <script>
+    //Reference to alerts in Assign. 1
     let params = (new URL(document.location)).searchParams;
     window.onload = function () {
-        if (params.has('LogError')) {
+        if (params.has('error')) {
             alert('Invalid Username or Password');
         }
     }
@@ -22,6 +18,7 @@
     <!--StyleSheets-->
     <link rel="stylesheet" href="signin.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Times+New+Roman|Oswald|Open+Sans">
+
 </head>
 <body >
   <script>
@@ -39,7 +36,7 @@
     <label for= "username"> <b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="username" id="username" required>
 
-    <label for="psw"><b>Password</b></label>
+    <label for="password"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
 
@@ -51,10 +48,10 @@
     document.write( `<p>Don't have an account? <a href="./Registration.html${location.search}">Sign Up!</a>.</p>`)
   </script>
 
-  
+  </form>
     
   </div>
-</form>
+
 </body>
 </html>
 <script> 
