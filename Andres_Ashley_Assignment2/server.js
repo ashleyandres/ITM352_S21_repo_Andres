@@ -21,7 +21,9 @@ app.all('*', function (request, response, next) {
 });
 
 app.use(myParser.urlencoded({ extended: true })); // load my url that is encoded
-//Reference to 4/13/21 lecture Lab 13
+
+
+//Reference to 4/13/21 lecture Lab 13, reads the file json
 var user_data_file = './user_data.json';
 if (fs.existsSync(filename)) {
     var file_stats = fs.statSync(filename);
@@ -53,13 +55,12 @@ app.post('/process_login', function (request, response, next) {
     if (typeof user_data[username_entered] != 'undefined') {
         //check if it matches with password
         if (user_data[username_entered]['password'] == password_entered) {
-            //what to do if it is all validated
             //All good, send to the invoice
             request.query["purchase_submit"] = "true";
             request.query["username"] = request.body["username"];
             response.redirect('invoice.html?' + qs.stringify(request.query));
 
-            //wrong password?
+        //wrong password?
         } else {
             error.push("Invalid Password");
             console.log(error);
@@ -89,6 +90,8 @@ app.post('/process_login', function (request, response, next) {
 
 app.post('/process_registration', function (request, response) {
     console.log(request.body);
+
+    //variables
     username = request.body.username;
     var RegError = [];
 
@@ -98,7 +101,6 @@ app.post('/process_registration', function (request, response) {
     else {
         RegError.push('Invalid Name');
     }
-
 
     if (request.body.name !== "") { //there must be a space in order to be a valid name
     }
@@ -114,6 +116,7 @@ app.post('/process_registration', function (request, response) {
     else {
         RegError.push('Invalid Email');
     }
+
 
     //-----Validate Username----//
 
@@ -170,10 +173,14 @@ app.post('/process_registration', function (request, response) {
 app.post("/process_purchase", function (request, response) {
     let POST = request.body; 
 
-//Algorithm from Assign1 for validating qty
+//Algorithm from Assign1 for validating qty modified for server
 if (typeof POST['submitPurchase'] != 'undefine'){
+
+    //Variables
     no_errors = true;
     has_quantities =false;
+
+    //Validating
     for (i = 0; i < products.length; i++){
         purchase=POST(`quantity${i}`);
         no_errors=has_quantities || purchase >0;
@@ -185,6 +192,7 @@ if (typeof POST['submitPurchase'] != 'undefine'){
         return;
     }
     else{
+        //did not pass validation? stay on page
         response.redirect('./products.html?'+stringified)
     }
 }
@@ -210,7 +218,3 @@ function checkQuantityTextbox(qtyTextboxObj) {
     document.getElementById(qtyTextboxObj.name + "_message").innerHTML = errs.join(' , ');
 }
 
-//if (post_data('username')){
-   // quantity_form['username'].value = params.get('username');
-  //  checkQuantityTextbox(quantity_form['quantity_textbox']);
-//}
