@@ -60,7 +60,7 @@ app.post('/process_login', function (request, response, next) {
             request.query["username"] = request.body["username"];
             response.redirect('invoice.html?' + qs.stringify(request.query));
 
-        //wrong password?
+            //wrong password?
         } else {
             error.push("Invalid Password");
             console.log(error);
@@ -96,7 +96,7 @@ app.post('/process_registration', function (request, response) {
     var RegError = [];
 
     //Validate Name
-    if (/^[A-Za-z]+$/.test(request.body.name)){//only letters can be used
+    if (/^[A-Za-z]+$/.test(request.body.name)) {//only letters can be used
     }
     else {
         RegError.push('Invalid Name');
@@ -121,14 +121,14 @@ app.post('/process_registration', function (request, response) {
     //-----Validate Username----//
 
     //Make sure that username is unique --> checks in DB in all lowercase (aka not case sensitive)
-    var reguser = request.body.username.toLowerCase(); 
+    var reguser = request.body.username.toLowerCase();
 
     //not define? username is not unique
-    if (typeof user_data[reguser] != 'undefined') { 
-      RegError.push('Username taken');
+    if (typeof user_data[reguser] != 'undefined') {
+        RegError.push('Username taken');
     }
 
-    if (request.body.username.length < 5 && request.body.username.length < 0){
+    if (request.body.username.length < 5 && request.body.username.length < 0) {
     } else {
         RegError.push('Username too Short');
     }
@@ -136,12 +136,12 @@ app.post('/process_registration', function (request, response) {
     }
     else {
         RegError.push('Letters And Numbers Only for Username');
-    } 
+    }
 
     //----Validate Password----//
     if (request.body.password.length < 6) {
         RegError.push('Password Too Short');
-      }
+    }
 
     if (RegError.length == 0) {
         console.log('Create New User')
@@ -156,46 +156,48 @@ app.post('/process_registration', function (request, response) {
         user_data[username].password = POST['password'];
         user_data[username].email = POST['email'];
         register = JSON.stringify(user_data); //parses and stores new user data in reg_info_str
+
+        //Add the new user into the database (user_data.json)
         fs.writeFileSync(user_data_file, register, "utf-8");
         request.query["purchase_submit"] = "true";
         request.query["username"] = request.body["username"];
         response.redirect('invoice.html?' + qs.stringify(request.query));
-    } else{
+    } else {
         request.query.RegError = RegError.join(';');
-    response.redirect('registration.html?' + qs.stringify(request.query));
-    
+        response.redirect('registration.html?' + qs.stringify(request.query));
+
     }
-    
+
 
 });
 
 //------Process_Purchase------//
 app.post("/process_purchase", function (request, response) {
-    let POST = request.body; 
+    let POST = request.body;
 
-//Algorithm from Assign1 for validating qty modified for server
-if (typeof POST['submitPurchase'] != 'undefine'){
+    //Algorithm from Assign1 for validating qty modified for server
+    if (typeof POST['submitPurchase'] != 'undefine') {
 
-    //Variables
-    no_errors = true;
-    has_quantities =false;
+        //Variables
+        no_errors = true;
+        has_quantities = false;
 
-    //Validating
-    for (i = 0; i < products.length; i++){
-        purchase=POST(`quantity${i}`);
-        no_errors=has_quantities || purchase >0;
-        no_errors=has_quantities && isNonNegInt(purchase);
+        //Validating
+        for (i = 0; i < products.length; i++) {
+            purchase = POST(`quantity${i}`);
+            no_errors = has_quantities || purchase > 0;
+            no_errors = has_quantities && isNonNegInt(purchase);
+        }
+        const stringified = qs.stringify(POST);
+        if (no_errors && has_quantities) {
+            response.redirect('./login.html?' + stringfied);
+            return;
+        }
+        else {
+            //did not pass validation? stay on page
+            response.redirect('./products.html?' + stringified)
+        }
     }
-    const stringified =qs.stringify(POST);
-    if(no_errors && has_quantities){
-        response.redirect('./login.html?' + stringfied );
-        return;
-    }
-    else{
-        //did not pass validation? stay on page
-        response.redirect('./products.html?'+stringified)
-    }
-}
 
 });
 
