@@ -92,22 +92,28 @@ app.post('/process_registration', function (request, response) {
     console.log(request.body);
 
     //variables
-    username = request.body.username;
     var RegError = [];
-
-    //Validate Name
-    if (/^[A-Za-z]+$/.test(request.body.name)) {//only letters can be used
+    
+    //--Validating Name---//
+    if (/^[A-Za-z]+$/.test(request.body.firstname)) { //forces the use of only letters for Full Name
     }
     else {
-        RegError.push('Invalid Name');
+      RegError.push('Use Only Letters for Full Name')
+    }
+    if (request.body.firstname == " ") { //requires this field
+      RegError.push('Invalid Full Name');
     }
 
-    if (request.body.name !== "") { //there must be a space in order to be a valid name
+    if (/^[A-Za-z]+$/.test(request.body.lastname)) { //forces the use of only letters for Full Name
     }
     else {
-        RegError.push('Invalid Name');
+      RegError.push('Use Only Letters for Full Name')
     }
-
+    if (request.body.lastname == " ") { //requires this field
+      RegError.push('Invalid Full Name');
+    }
+   
+    
 
     //-----Validate Email-----//
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -128,7 +134,7 @@ app.post('/process_registration', function (request, response) {
         RegError.push('Username taken');
     }
 
-    if (request.body.username.length < 5 && request.body.username.length < 0) {
+    if (request.body.username.length > 5) {
     } else {
         RegError.push('Username too Short');
     }
