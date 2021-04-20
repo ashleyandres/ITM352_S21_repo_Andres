@@ -1,19 +1,19 @@
-var express = require('express');
+var express = require('express');//packaged middle-ware, makes server operate
 var app = express();
-var data = require('./static/products.js');
+var data = require('./static/products.js'); //get my products
 var products = data.products;
-var myParser = require("body-parser");
-const qs = require('qs');  //reads through the JSON object
+var myParser = require("body-parser"); //reads through the JSON object
+const qs = require('qs');  //var for the querystring
 var products = require('./static/products.js'); //loads my products
 //var user_data_file = require('./user_data.json');
 var fs = require('fs'); //to read the files
 //any request methods 
-var filename = 'user_data.json';
-const { request } = require('express');
+var filename = 'user_data.json'; //var for the user db
+const { request } = require('express'); //utilize express
 
 
 
-
+//For all oputputs
 app.all('*', function (request, response, next) {
     console.log(request.method + ' to ' + request.path);
     next();
@@ -60,7 +60,7 @@ app.post('/process_login', function (request, response, next) {
             request.query["username"] = request.body["username"];
             response.redirect('invoice.html?' + qs.stringify(request.query));
 
-            //wrong password?
+         //wrong password?, let the console know, push error to alert on login page
         } else {
             error.push("Invalid Password");
             console.log(error);
@@ -70,7 +70,7 @@ app.post('/process_login', function (request, response, next) {
         }
 
 
-        //wrong username?
+    //wrong username?, let the console know, push error to alert on login page
     } else {
         error.push = ('Invalid Username');
         console.log(error);
@@ -95,27 +95,24 @@ app.post('/process_registration', function (request, response) {
     var RegError = [];
     
     //--Validating Name---//
-    if (/^[A-Za-z]+$/.test(request.body.firstname)) { //forces the use of only letters for Full Name
+    if (/^[A-Za-z]+$/.test(request.body.name)) { //Only letters
     }
     else {
       RegError.push('Use Only Letters for Full Name')
-    }
-    if (request.body.firstname == " ") { //requires this field
-      RegError.push('Invalid Full Name');
     }
 
-    if (/^[A-Za-z]+$/.test(request.body.lastname)) { //forces the use of only letters for Full Name
-    }
-    else {
-      RegError.push('Use Only Letters for Full Name')
-    }
-    if (request.body.lastname == " ") { //requires this field
+
+    if (request.body.name == " ") { //requires this field
       RegError.push('Invalid Full Name');
     }
    
-    
+    if (request.body.name.length <30) {
+    } else {
+        RegError.push('Name Too Long');
+    }
 
     //-----Validate Email-----//
+    //reference to w3 schools
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (request.body.email.match(mailformat)) {
     }
@@ -126,18 +123,19 @@ app.post('/process_registration', function (request, response) {
 
     //-----Validate Username----//
 
-    //Make sure that username is unique --> checks in DB in all lowercase (aka not case sensitive)
+    //Make sure that username is unique --> checks in DB in all lowercase 
     var reguser = request.body.username.toLowerCase();
 
     //not define? username is not unique
     if (typeof user_data[reguser] != 'undefined') {
         RegError.push('Username taken');
     }
-
-    if (request.body.username.length > 5) {
+    //min 4 characters, max 10 characters
+    if (request.body.username.length > 4 || request.body.username.length < 10 ) {
     } else {
-        RegError.push('Username too Short');
+        RegError.push('Username Invalid');
     }
+    //numbers and letters only
     if (/^[0-9a-zA-Z]+$/.test(request.body.username)) {
     }
     else {
@@ -149,10 +147,23 @@ app.post('/process_registration', function (request, response) {
         RegError.push('Password Too Short');
     }
 
+    //--Confirm Password---//
+    if (request.body.password !== request.body.cpassword) { 
+        errors.push('Password Not a Match')
+    
+    }
+
+    //Sticky
+    request.query.name = request.body.name;
+    request.query.username = request.body.username;
+    request.query.email = request.body.email;
+
     if (RegError.length == 0) {
         console.log('Create New User')
         //Adding a new user, 
-        //Used Lab 14 as foundation, and reference Alyssa Mencel's A2 to help modify --> more for the posting parts
+        //Used Lab 14 as foundation
+
+        //variable
         let POST = request.body;
 
         //send data to user_data.json to be stored
@@ -168,7 +179,8 @@ app.post('/process_registration', function (request, response) {
         request.query["purchase_submit"] = "true";
         request.query["username"] = request.body["username"];
         response.redirect('invoice.html?' + qs.stringify(request.query));
-    } else {
+    
+    } else { //if there are errors, keep on reg page
         request.query.RegError = RegError.join(';');
         response.redirect('registration.html?' + qs.stringify(request.query));
 
@@ -194,7 +206,8 @@ app.post("/process_purchase", function (request, response) {
             no_errors = has_quantities || purchase > 0;
             no_errors = has_quantities && isNonNegInt(purchase);
         }
-        const stringified = qs.stringify(POST);
+        //send to login page
+        const stringified = qs.stringify(POST); //var
         if (no_errors && has_quantities) {
             response.redirect('./login.html?' + stringfied);
             return;
