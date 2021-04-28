@@ -15,9 +15,37 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 //var session = require('express-session');
 
+var session = require('express-session');
+
+app.use(session({secret: "ITM352 rocks!"}));
+
 const { request } = require('express'); //utilize express
+//const { runInNewContext } = require('node:vm');
 
+//play with sessions
+app.get('/set_session', function (req,res,next){
+    res.send(`welcome, your session ID is ${req.session.id}`);
+    next();
+});
 
+//Cookies
+app.get('/set_cookie', function (req,res,next){
+    let my_name = 'Ashley Andres';
+    //res.clearCookie('my_name');
+    now = new Date();
+   res.cookie('my_name', my_name, {expire: 5000 +now.getTime() });
+    res.send(`Cookies ${my_name} sent`);
+    next();
+});
+
+app.get('/use_cookie', function (req,res,next){
+    if (typeof req.cookies["my_name"] != 'undefined'){
+        res.send(`Hello ${req.cookies["my_name"]}!`);
+    } else {
+        res.send("I don't know you");
+    }
+    next();
+});
 
 //For all oputputs
 app.all('*', function (request, response, next) {
@@ -48,7 +76,14 @@ if (fs.existsSync(filename)) {
 //Reference to 4/13/21 Lecture, Lab 13
 
 app.post('/process_login', function (request, response, next) {
-
+    if(typeof request.session['last_login']!= 'undefine'){
+        console.log('Last login time was' + request.session['last_login']);
+       
+    } else {
+        console.log("first time login");
+       
+    }
+    request.session['last_login'] = Date();
     //Variables
     var error = [];
     username = request.body.username;
@@ -59,8 +94,13 @@ app.post('/process_login', function (request, response, next) {
     //---Check Login---//
     //check if the username is valid
     if (typeof user_data[username_entered] != 'undefined') {
+        if (typeof request.cookie ['username']!= 'undefined'){
+            response.send(`${request.cookie['username']}is already logged in`);
+        }
         //check if it matches with password
         if (user_data[username_entered]['password'] == password_entered) {
+            response.cookie('username', username_entered);
+            response.send(`${'username'}`);
             //All good, send to the invoice
             request.query["purchase_submit"] = "true";
             request.query["username"] = request.body["username"];
