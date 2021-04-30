@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+<style>
+    body {
+        background-color: maroon;
+        color: white;
+        margin: 20px 70px 20px 70px;
+    }
+    table {
+        border:1px black;
+        padding-block: 15px;
+    }
+    img {
+        width: 100px;
+        height: 100px
+    }
+    th {
+        font-size: 25px;
+    }
+    .item {
+        vertical-align: top;
+        
+    }
+    td{
+        vertical-align: middle;
+    }
+
+</style>
+<body>
+    <!--Copy from invocie.html on how to get the data linked to this page-->
+    <!--May need to input params.get function to link them-->
+    <h1 style="text-align: center;">Shopping Cart</h1>
+    <!--Input button to check out, have it redirect to the Login Page-->
+
+    
+
+<table style="width:100%; text-align: center; ">
+  <tr>
+    <th>Product</th>
+    <th></th> 
+    <th></th>
+    <th>Total</th>
+  </tr>
+  <tr>
+    <td>
+        
+        <img src="images/blackring.jpg" alt="">
+        <span class="item">Black Ring
+        </span>
+       
+        
+    </td>
+    <td>Quantity</td>
+    <!--Insert Quantity element, add and substract-->
+    <td>Price</td>
+    <!--Insert to get the price-->
+
+    <td>$0.00</td>
+    <!--Insert calcualtion of price, use from invocie-->
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+  </tr>
+</table>
+</body>
+</html>
