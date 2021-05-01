@@ -86,14 +86,14 @@
             
         <header>
         <div class="navbar">
-            <a class="home_button" href="http://localhost:8080/" style="padding-right: 20px;">Home</a>
+            <a class="home_button" href="./index.html" style="padding-right: 20px;">Home</a>
             <a href="#products" class="shop_button">Shop</a>
         </div>
        
        
         <hi>Feng Shui</hi>
         <br> 
-        <img src=https://i.pinimg.com/736x/af/5d/ae/af5daea0c0412c3967fbed8f08f04a97.jpg class="logo">
+        <img src="images/logo.jpg" class= "logo">
 </header>
 
     
@@ -110,6 +110,7 @@
         <script>
             /* Below it will loop the products from products.js 
             inserted a textbox that will hold the quantity that is inputted
+            
             */
             for (i = 0; i < products.length; i++) {
                 document.write(`
@@ -125,7 +126,7 @@
       
   </section>
       `);
-                //span will only appear a message when an invalid quantity has been inputted --> look at CheckQuantityTextbox function to see what is going on
+                //Prof. Port span will only appear a message when an invalid quantity has been inputted --> look at CheckQuantityTextbox function to see what is going on
             }
         </script>
 
@@ -138,9 +139,9 @@
             <!--Purchase Button-->
             <input type="submit" value="Purchase!" name="purchase_submit" class="purchase">
         </h1>
-
-    </footer>
 </form>
+    </footer>
+
 </body>
 
 </html>

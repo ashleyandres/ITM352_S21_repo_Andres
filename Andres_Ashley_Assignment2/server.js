@@ -1,3 +1,4 @@
+//Ashley Andres's Server Fall 2020//
 var express = require('express');//packaged middle-ware, makes server operate
 var app = express();
 var data = require('./static/products.js'); //get my products
@@ -93,14 +94,15 @@ app.post('/process_login', function (request, response, next) {
 
 
 //------------Process_Registration--------//
-
+//--Validations are reference to Alyssa Mencel's Fall 2020 Assignment 2, Notes also were reference--//
 app.post('/process_registration', function (request, response) {
     console.log(request.body);
 
     //variables
     var RegError = [];
-    
+
     //--Validating Name---//
+    
     if (/^[A-Za-z]+$/.test(request.body.name)) { //Only letters
     }
     else {
@@ -166,9 +168,9 @@ app.post('/process_registration', function (request, response) {
 
     if (RegError.length == 0) {
         console.log('Create New User')
-        //Adding a new user, 
-        //Used Lab 14 as foundation
 
+        //---Adding a new user---//
+        //Used Lab 14 as foundation
         //variable
         let POST = request.body;
 
@@ -181,6 +183,7 @@ app.post('/process_registration', function (request, response) {
         register = JSON.stringify(user_data); //parses and stores new user data in reg_info_str
 
         //Add the new user into the database (user_data.json)
+        //Referred to Alyssa Mencel's server for this
         fs.writeFileSync(user_data_file, register, "utf-8");
         request.query["purchase_submit"] = "true";
         request.query["username"] = request.body["username"];
@@ -199,7 +202,8 @@ app.post('/process_registration', function (request, response) {
 app.post("/process_purchase", function (request, response) {
     let POST = request.body;
 
-    //Algorithm from Assign1 for validating qty modified for server
+    //Algorithm FROM Alyssa Mencel's Assignment 1, some variables changed for my understanding and tailored to my own variables
+
     if (typeof POST['submitPurchase'] != 'undefine') {
 
         //Variables
@@ -226,7 +230,7 @@ app.post("/process_purchase", function (request, response) {
 
 });
 
-app.use(express.static('./static'));
+app.use(express.static('/static'));
 app.listen(8080, () => console.log(`listening on port 8080`));
 
 //Validation code borrowed from Assign.1

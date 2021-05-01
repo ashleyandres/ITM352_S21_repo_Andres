@@ -1,3 +1,4 @@
+/*Ashley Andres's Website CSS sheet*/
 body {
     Font-family:"times new roman";
     color: white;
@@ -57,6 +58,7 @@ main{
     
 
 }
+/*Taken from the w3 website templates*/
 .card-4{
     box-shadow:0 4px 10px 0 
      rgb(255, 255, 255),0 4px 20px 0 rgba(255, 255, 255, 0.19);

@@ -1,3 +1,4 @@
+//Ashley Andres's Server//
 var express = require('express');//packaged middle-ware, makes server operate
 var app = express();
 var data = require('./static/products.js'); //get my products
@@ -93,6 +94,7 @@ app.post('/process_login', function (request, response, next) {
 
 
 //------------Process_Registration--------//
+//--Validations are reference to Alyssa Mencel's Fall 2020 Assignment 2, Notes also were reference--//
 
 app.post('/process_registration', function (request, response) {
     console.log(request.body);
@@ -166,8 +168,10 @@ app.post('/process_registration', function (request, response) {
 
     if (RegError.length == 0) {
         console.log('Create New User')
-        //Adding a new user, 
+
         //Used Lab 14 as foundation
+        //Add the new user into the database (user_data.json)
+        //Referred to Alyssa Mencel's server for this
 
         //variable
         let POST = request.body;
@@ -196,10 +200,11 @@ app.post('/process_registration', function (request, response) {
 });
 
 //------Process_Purchase------//
+
 app.post("/process_purchase", function (request, response) {
     let POST = request.body;
 
-    //Algorithm from Assign1 for validating qty modified for server
+   //Algorithm FROM Alyssa Mencel's Assignment 1, some variables changed for my understanding and tailored to my own variables
     if (typeof POST['submitPurchase'] != 'undefine') {
 
         //Variables
