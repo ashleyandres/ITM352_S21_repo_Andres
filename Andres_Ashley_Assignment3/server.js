@@ -50,6 +50,8 @@ if (fs.existsSync(filename)) {
 
 app.post('/process_login', function (request, response, next) {
 
+    //give them a cookie to be tracked --> use the username to look up stuff in the json --> make cookie expire at a certain time
+    //respond with a cookie and their user id --> checck if their loggef
     //Variables
     var error = [];
     username = request.body.username;

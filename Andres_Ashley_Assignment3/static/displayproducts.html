@@ -81,6 +81,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Times+New+Roman|Oswald|Open+Sans">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
 </head>
 
 
@@ -88,42 +90,57 @@
 
     <!--Nav Bar-->
             
-        <header>
-        <div class="navbar">
-            <a class="home_button" href="./" style="padding-right: 20px; text-align: left;">Home</a>
-            <a href="#products[product_type]" class="shop_button"style="padding-right: 20px;text-align: left;">Shop</a>
-
-            <a class="home_button" href="./Login.html"style="padding-right: 20px;text-align: left;">Login</a>
-            <a class="home_button" style="text-align: left;" href="./Registration.html">Register</a>
-            <!--Shopping Cart, taken from w-3 schools template-->
+        <header> 
             
             
-       
-        </div>
+           <div class="navbar">
+               
+                <div class="dropdown navbar">
+                  <button class="dropbtn">
+                    <div class="menuicon"></div>
+                    <div class="menuicon"></div>
+                    <div class="menuicon"></div> 
+                    
+                    <div class="dropdown-content">
+                        <i class="fa fa-caret-down"></i>
+                   <a class="home_button" href="./" style="padding-right: 20px; text-align: left;">Home</a>
+                    <a href="#products[product_type]" class="shop_button"style="padding-right: 20px;text-align: left;">Shop</a>
+                    <a class="home_button" href="./Login.html"style="padding-right: 20px;text-align: left;">Login</a>
+                    <a class="home_button" style="text-align: left;" href="./Registration.html">Register</a>
+                  </div>
+                </div>
+                  </button>
+                  
+              </div>
        
        
         <hi>Feng Shui</hi>
         <br> 
-        <img src="images/logo.jpg" class="logo">
+        <a href = "./index.html">
+            <img class= "logo" src="images/logo.jpg"> 
 </header>
-
+ 
     <!--Professor Port helped with the loop of the products all in one page-->
     <!--Display the products in the Nav Bar-->
-<div id="products[product_type]">
-    <div class="bracelet">
-       <script>
-            for(ptype in products){
-                document.write(`<a class="home_button" href="./displayproducts.html?product_type=${ptype}" style="padding-right: 70px;">${ptype}</a>`)
-            }
-            
-        </script>
-
-        <!--template monster template of a cart, took their css too-->
-        <div style="text-align: right;">
-        <a>
+<div id="products[product_type]" >
+    <div class="topnav bracelet"style="padding: 20px;">
+           
+        <script>
+        for(ptype in products){
+            document.write(`<a class="home_button" href="./displayproducts.html?product_type=${ptype}" style="padding-right: 70px;">${ptype}</a>`)
+        }
+        
+    </script>
+    <div class="header" style="text-align: right;">
+        <a href="./cart.html">
             <i type = "button"class="fa fa-shopping-cart " >Cart</i>
             
         </a>
+        </div>
+  </div>
+
+        <!--template monster template of a cart, took their css too-->
+       
     </div>
 </div>
 </div>
