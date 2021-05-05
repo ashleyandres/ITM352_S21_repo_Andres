@@ -230,7 +230,7 @@ app.post("/process_purchase", function (request, response) {
 
 });
 
-app.use(express.static('/static'));
+app.use(express.static('./static'));
 app.listen(8080, () => console.log(`listening on port 8080`));
 
 //Validation code borrowed from Assign.1

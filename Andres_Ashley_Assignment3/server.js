@@ -49,6 +49,9 @@ if (fs.existsSync(filename)) {
 //Reference to 4/13/21 Lecture, Lab 13
 
 app.post('/process_login', function (request, response, next) {
+    if (typeof request.cookies ['username'] != 'undefined'){
+        response.send(`${request.cookies['username']} is already logged in`)
+    }
 
     //give them a cookie to be tracked --> use the username to look up stuff in the json --> make cookie expire at a certain time
     //respond with a cookie and their user id --> checck if their loggef
@@ -67,7 +70,10 @@ app.post('/process_login', function (request, response, next) {
             //All good, send to the invoice
             request.query["purchase_submit"] = "true";
             request.query["username"] = request.body["username"];
+            //Cookie --> Screencast 4/47/21, Lab 15 
+            response.cookies('username', username_entered);
             response.redirect('invoice.html?' + qs.stringify(request.query));
+
 
          //wrong password?, let the console know, push error to alert on login page
         } else {
@@ -206,6 +212,7 @@ app.post('/process_registration', function (request, response) {
 app.post("/process_purchase", function (request, response) {
     let POST = request.body;
 
+
    //Algorithm FROM Alyssa Mencel's Assignment 1, some variables changed for my understanding and tailored to my own variables
     if (typeof POST['submitPurchase'] != 'undefine') {
 
@@ -214,7 +221,7 @@ app.post("/process_purchase", function (request, response) {
         has_quantities = false;
 
         //Validating
-        for (i = 0; i < products.length; i++) {
+        for (i = 0; i < products.length; i++){
             purchase = POST(`quantity${i}`);
             no_errors = has_quantities || purchase > 0;
             no_errors = has_quantities && isNonNegInt(purchase);
@@ -222,7 +229,7 @@ app.post("/process_purchase", function (request, response) {
         //send to login page
         const stringified = qs.stringify(POST); //var
         if (no_errors && has_quantities) {
-            response.redirect('./login.html?' + stringfied);
+            response.redirect('./Login.html?' + stringfied);
             return;
         }
         else {

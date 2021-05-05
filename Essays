@@ -7,3 +7,28 @@ labels:
   - Software Engineering
   - Learning
 ---
+Provide a brief introduction to the assignment along with a link to this page for further details
+
+So basically Assignment 2 required us to make a login and registration page. This made us creat validation and restriction for users when creating their profile as a new users and we also had to store their information in a database so that we can use their information in the future, for example when they have to log back in again, we can verify they are already a user by matching up data in our database. We also had to personalize our invocie page, and we were able to do so because we already had a file that had the usernames information. In assignment 2 we also had to make sure our pages flow across other pages, which basically meant we had to put atleast some sort of navbar in there.
+
+What did you learn from this assignment?
+
+That it is possible to figure out things on my own if I just utilized my resources. There was one point where my server was completley not communicating with my form and it took me about a whole day to realize that my end tag was not in the right place, so everything that was in my form was not able to work on the server. I learned that debugging is an important practice. Even though we kind of skimmed over it in class, I felt like if I had just debugged the program instead of being stubborn and wanting to figure everything out myself, I could have literally saved myself time a whole lot of headache.
+
+Did you work with a partner? Assign an estimated percentage on the amount each team member contributed to the assignment (including yourself).
+100% Me
+
+How did you get help when you needed it? What did you need help with?
+So for this assignment, I wanted to do it on my own and tried not to ask for help. I heavily relied on watching the screen casts and during desperate moments, looked at other people's codes as inspiration for validation(cause like why would I try to invent the wheel when it's already invented, you know what I mean). I caved in when I could not get my form to work. I had a limit for myself if I was not able to solve a problem by Monday, I would ask for help. 
+
+How was developing this assignment different than assignment #1?
+In Assignment #1 I lacked a lot of confidence and would rely on Professor Port's office hours to get what needed to be done through the Office Hours. It kind of hurted my pride that I was not able to figure stuff out myself. So instead of being dependent, I was really independent for Assignment#2. I was able to first think things through before making code. For example, for the logiin page, I had to plan out what I wanted this particlar page to do and how the other pages would interact with it. I also had the funtions of the page, like the buttons and the types of buttons they would be. I did plan while I was coding though, so I kind of did wing it the whole time. It did worked out in the end, but some of my indecisivness cost me atleast a days worth of work.
+
+Estimate the % of time you spent (a) thinking about how to do something, (b) writing code (but do not include testing, (c) testing and debugging
+I can't actually give an actual estimates, since for this Assignment#2, I kind of planned along the way and as we were going through the labs, I made mental notes on what codes I could use for the Assignment and go back on the screencast when I was formulating code in my Assignment #2. Again, my indecisivness did cost me a lot of time, however I did know what I wanted each page to do. It was just the matter of how I would desing the page and where to put code was the difficult part. If I could give an overall estimate, I would say, maybe 2 hours worth of thinking.
+
+Describe what worked well with this project? What did not work well?
+Designing the login and registration pages were a lot easier than creating my other pages. I find that using a template is a lot easier and that there are ways that I can change the design using another person's template. What did not work well was, well I basically did not use the debugger, which was a huge mistake on my part. I should have used the additional tools that could have helped me find mistakes faster than my own two eyes. This could have literally saved me a whole days works and I could have designed my website better.
+
+If you could go back in time and do things differently, what would you do differently?
+I would go back to Assignment #1 and used a tempalte instead of trying to copy bits and pieces of other people's templates. That was just a pain, but atleast now I know how to use CSS confidently now. I would also utilize the debugger, which I will use for Assignment #3 since we are using sessions and cookies and since they are going to be working on multiple pages, I need be tedious on how the code is implented
