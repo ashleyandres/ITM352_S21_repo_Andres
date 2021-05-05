@@ -84,7 +84,7 @@ app.post('/process_login', function (request, response, next) {
         request.query.username = username;
         request.query.error = error.join(';');
     }
-    response.redirect('./login.html?' + qs.stringify(request.query)); // If error is present, remain on the login page
+    response.redirect('./Login.html?' + qs.stringify(request.query)); // If error is present, remain on the login page
 });
 
 
@@ -103,7 +103,7 @@ app.post('/process_registration', function (request, response) {
 
     //--Validating Name---//
     
-    if (/^[A-Za-z]+$/.test(request.body.name)) { //Only letters
+    if (/^[A-Za-z]+ [A-Za-z]+$/.test(request.body.name)) { //Only letters
     }
     else {
       RegError.push('Use Only Letters for Full Name')
@@ -191,7 +191,7 @@ app.post('/process_registration', function (request, response) {
     
     } else { //if there are errors, keep on reg page
         request.query.RegError = RegError.join(';');
-        response.redirect('registration.html?' + qs.stringify(request.query));
+        response.redirect('./Registration.html?' + qs.stringify(request.query));
 
     }
 

@@ -137,11 +137,10 @@
     <div id="products[product_type]">
         <div class="topnav bracelet" style="padding: 20px;">
 
+<!-- Office Hours with Prof. Port, Loops the products and creates other -->
             <script>
                 for (ptype in products) {
-                    if (ptype == products){
-                        continue;
-                    }
+                    if (products == product_type) continue;
                     document.write(`<a class="home_button" href="./displayproducts.html?product_type=${ptype}" style="padding-right: 70px;">${ptype}</a>`)
                 }
 
@@ -159,7 +158,7 @@
                                 <b>4</b>
                             </span>
                         </h4>
-                        <!--Have it parse through the quantity boxes to display the quantity in the shopping cart-->
+                        <!--Use the session to get the query string of the quantity and keep it into this form-->
 
                         <p><a href="#">Product 1</a> <span class="price">$15</span></p>
                         <p><a href="#">Product 2</a> <span class="price">$5</span></p>
