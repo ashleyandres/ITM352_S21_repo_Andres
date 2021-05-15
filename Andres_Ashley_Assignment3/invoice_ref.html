@@ -1,0 +1,167 @@
+<script src="./products.js" type="text/javascript"></script>
+<script src="./user_data.json" type="json"></script> 
+
+<script>
+  //Get the quantity from products.html
+  var params = (new URL(document.location)).searchParams;
+
+  // Assignment 3 Example Code display_productc.html
+  // Gets the query string of products_key the quantities?
+  if (params.has('product_key')){
+    shopping_cart = JSON.parse(response); //gets the response.cookie.cart data from server
+
+  } else {
+    document.write ('no products selected'); //change this to alert the user
+  }
+
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./CSS styles/table.css">
+  <title>Reciept</title><style>
+			
+		</style>
+	</head>
+</head>
+<body style="background-image: url(images/background.jpeg);">
+  <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Feng Shui Reciept</title>
+
+		
+
+	<body>
+		<div class="invoice-box">
+			<table cellpadding="0" cellspacing="0">
+				<tr class="top">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td class="title">
+									
+                  <h1>Feng Shui Reciept</h1>
+								</td>
+
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr class="information">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td>
+                  <script>
+                    document.write(`<p> Thank you for your order ${params.get('username')}!<p>`);
+                  </script>
+              
+								</td>
+
+
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr class="heading">
+					<th>Item</th>
+          <th></td>QTY</th>
+
+					<th>Price</th>
+           <th>Amount</th>
+				</tr>
+
+        <script>
+          var subtotal = 0;
+          // product rows 
+          for (i = 0; i < products[product_type].length; i++) {
+            //container to hold the quantity
+
+            //Assignemnt 3 example code gets the quantity for all products
+            qty = shopping_cart[product_type][i]; 
+            //no quantity inputted? reloop and check other textboxes
+            if (qty == 0) {
+              continue;
+            }
+            extended_price = qty * products[i].price;
+            subtotal += extended_price;
+            document.write(`
+    <tr>
+      <td >${products[product_type][i].name}</td>
+      <td align="center" width="11%">${qty}</td>
+      <td width="13%">\$${(products[product_type][i].price).toFixed(2)}</td>
+      <td width="54%">\$${extended_price.toFixed(2)}</td>
+    </tr>
+    `);
+          }
+  
+  
+  
+        </script>
+
+       
+<script>
+  //Taxes
+  var tax_rate = 0.04166;
+  var tax = tax_rate * subtotal;
+
+  //Shipping
+  //Modified shipping prices
+  if (subtotal >= 50) { //items over $20 gets free shipping
+    shipping = 0;
+  }
+
+  else {
+    shipping = 0.10 * subtotal; // 10% of purchase is the shipping
+  }
+
+  //Total
+  var total = subtotal + tax + shipping;
+</script>
+        <tr class="subs">
+          <td></td>
+          <td></td>
+          <td></td>
+          
+					<td>Sub-Total: <script>document.write(subtotal.toFixed(2));</script></td>
+          
+				</tr>
+        <tr class="subs">
+					<td></td>
+          <td></td>
+          <td></td>
+       
+					<td>Taxes:<script>document.write(tax.toFixed(2
+            ));</script></td>
+				</tr>
+        <tr class="subs">
+					<td></td>
+          <td></td>
+          <td></td>
+					<td>Shipping:$ <script>document.write(shipping.toFixed(2
+            ));</script></td>
+				</tr>
+				<tr class="total">
+					<td></td>
+          <td></td>
+          <td></td>
+					<td style="border-top: 2px solid black; font-weight: bold;">Total: $<strong>
+            <script>document.write(total.toFixed(2));</script>
+          </strong></td>
+				</tr>
+			</table>
+		</div>
+    <script>
+      document.write(`<h1>Thank You for Your order ${params.get('username')}!</h1>`);
+    </script>
+	</body>
+</html>
+</body>
+</html>

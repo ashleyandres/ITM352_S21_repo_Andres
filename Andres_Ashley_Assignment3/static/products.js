@@ -146,3 +146,6 @@ var products = {
   "Rings": rings,
   "Earrings": earrings
 }
+if (typeof module != 'undefined'){
+  module.exports.products=products;
+}

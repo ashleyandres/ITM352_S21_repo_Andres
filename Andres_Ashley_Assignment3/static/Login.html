@@ -22,6 +22,27 @@
 
 </head>
 <body >
+  <div class="navbar">
+
+    <div class="dropdown navbar">
+        <button class="dropbtn">
+            <div class="menuicon"></div>
+            <div class="menuicon"></div>
+            <div class="menuicon"></div>
+
+            <div class="dropdown-content">
+                <i class="fa fa-caret-down"></i>
+                <a class="home_button" href="./" style="padding-right: 20px; text-align: left;">Home</a>
+                <a href="#products[product_type]" class="shop_button"
+                    style="padding-right: 20px;text-align: left;">Shop</a>
+                <a class="home_button" href="./Login.html"
+                    style="padding-right: 20px;text-align: left;">Login</a>
+                <a class="home_button" style="text-align: left;" href="./Registration.html">Register</a>
+            </div>
+    </div>
+    </button>
+
+</div>
   <script>
     document.write( `<form class ="login" action="process_login${location.search}" method="POST">`)
   </script>
@@ -56,5 +77,5 @@
 </body>
 </html>
 <script> 
-  login.action += document.location.search; // Saves query string from my products page for the invoice (Borrowed from Prof. Port)
+  //login.action += document.location.search; // Saves query string from my products page for the invoice (Borrowed from Prof. Port)
 </script>

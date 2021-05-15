@@ -2,32 +2,11 @@
 <!--Gets the Product Data-->
 <script src="./products.js" type="text/javascript"></script>
 
-<script>
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
 
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>
 
 <script>
-    //Check for Errors, make sure they are putting valid input
-    function isNonNegInt(q, returnErrors = false) {
-        if (q == '') q = 0;
-        var errors = [];
-        if (Number(q) != q) errors.push('Not a number!');
-        if (q < 0) errors.push('Negative value!');
-        if (parseInt(q) != q) errors.push('Not an integer!');
 
-        return returnErrors ? errors : (errors.length == 0);
-    }
 
-    function checkQuantityTextbox(qtyTextboxObj) {
-        errs = isNonNegInt(qtyTextboxObj.value, true);
-        document.getElementById(qtyTextboxObj.name + "_message").innerHTML = errs.join(' , ');
-    }
 
     //Reference Office Hours with Professor Port
     //Get the quantity from products[product_type].html
@@ -68,10 +47,6 @@
             //Tells computer what to do when there is no quantities
             else if (!has_quantities) {
                 alert(" Please select some products[product_type]");
-            }
-            //Tells computer that it did not meet the above conditions (its valid) therefore send it to the invoice.html page 
-            else {
-                window.location.href = "Login.html" + document.location.search;
             }
 
         }
@@ -134,65 +109,34 @@
 
     <!--Professor Port helped with the loop of the products all in one page-->
     <!--Display the products in the Nav Bar-->
-    <div id="products[product_type]">
-        <div class="topnav bracelet" style="padding: 20px;">
+    <div id="products[product_type]"class="topnav bracelet" style="padding: 20px;">
+       
 
 <!-- Office Hours with Prof. Port, Loops the products and creates other -->
             <script>
                 for (ptype in products) {
-                    if (products == product_type) continue;
+                    if (product_type == products) continue;
                     document.write(`<a class="home_button" href="./displayproducts.html?product_type=${ptype}" style="padding-right: 70px;">${ptype}</a>`)
                 }
 
-            </script>
-            <div class="header" style="text-align: right;">
-                <div class="form-popup" style="text-align: right;" id="myForm">
-                        <form name="product_selection_form" action="/process_purchase" class="form-container"method="POST">
-                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                        <!--Items inside the shopping cart-->
+            </script> 
+            <!--Cart---------->
+            <div style="text-align: right;"> 
+                <a class="home_button fa fa-shopping-cart " href="./invoice.html">
+                    <i type="button" style="font-size: 25px;" 
+                    ></i></a>
 
-
-                        <h4>Cart
-                            <span class="price" style="color:black">
-                                <i class="fa fa-shopping-cart"></i>
-                                <b>4</b>
-                            </span>
-                        </h4>
-                        <!--Use the session to get the query string of the quantity and keep it into this form-->
-
-                        <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-                        <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-                        <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-                        <p><a href="#">Product 4</a> <span class="price">$2</span></p>
-                        <hr>
-                        <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
-
-                        <!--Purchase Button-->
-                        <input type="submit" value="Purchase!" name="purchase_submit" class="purchase">
-
-
-                    </form>
-
-                </div>
-
-                <!--template monster template of a cart, took their css too-->
-                <button class="open-button" onclick="openForm()"><i type="button"
-                        class="fa fa-shopping-cart ">Cart</i></button>
-
-                </a>
-            </div>
-        </div>
-
-    </div>
-    </div>
-    </div>
+                        
+         </div>
+     </div>
 
 
     <!--Form that will hold all the data below and keep the names and ids with it-->
-    <form name="product_selection_form" action="/process_purchase" method="POST">
+    <form name="product_selection_form" action="/add_to_cart" method="POST">
         <main>
 
             <script>
+                document.write(`<input type="hidden" name="product_type" value="${product_type}">`);
                 /* Below it will loop the products[product_type] from products[product_type].js 
                 inserted a textbox that will hold the quantity that is inputted
                 */
@@ -203,39 +147,33 @@
       <img src=${products[product_type][i].image} >
       <p> \$${(products[product_type][i].price).toFixed(2)}</p>
         <label id="quantity${i}_label"}">Quantity</label>
-       <input type="text" placeholder="0" name="quantity${i}" onkeyup="checkQuantityTextbox(this);">
+       <input type="number" placeholder="0" name="quantity${i}" ;" min="0">
        <br>
        <span id="quantity${i}_message"></span>
       
       
   </section>
       `);
-                    //span will only appear a message when an invalid quantity has been inputted --> look at CheckQuantityTextbox function to see what is going on
+                    //span will only appear a message when an invalid quantity has been inputted --> look at CheckQuantityTextbox function to see what is going on  <label for="quantity">Quantity (between 1 and 5):</label>
+ 
                 }
             </script>
 
         </main>
         <footer>
 
-            <h1 style="background-color: maroon; text-align: center;color: white;">
-                Bringing Luck Into Your Year!
-                <br>
-                <!--Purchase Button-->
-                <input type="submit" value="Purchase!" name="purchase_submit" class="purchase">
-            </h1>
+           
+        <h1 style="background-color: maroon; text-align: center;color: white;">
+            Bringing Luck Into Your Year!
+            <br>
+            <!--Purchase Button-->
+            <input type="submit" value="Add to Cart" name="add_qty" class="purchase">
+              </form>
+        </h1>
+           
 
         </footer>
     </form>
 </body>
 
 </html>
-<!--Pops out the Shopping cart-->
-<script>
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
-
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>

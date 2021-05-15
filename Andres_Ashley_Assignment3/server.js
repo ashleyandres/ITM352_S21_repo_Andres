@@ -2,29 +2,32 @@
 var express = require('express');//packaged middle-ware, makes server operate
 var app = express();
 var data = require('./static/products.js'); //get my products
-var products = data.products;
+var allproducts = data.products;
 var myParser = require("body-parser"); //reads through the JSON object
 const qs = require('qs');  //var for the querystring
-var products = require('./static/products.js'); //loads my products
+var nodemailer = require("nodemailer");
+
 //var user_data_file = require('./user_data.json');
 var fs = require('fs'); //to read the files
 //any request methods 
 var filename = 'user_data.json'; //var for the user db
 
 //my cookie middle-ware
-var cookieParser = require('cookie-parser'); 
+var cookieParser = require('cookie-parser');
 app.use(cookieParser());
+var session = require('express-session');
 
-//var session = require('express-session');
-const { request } = require('express'); //utilize express
+app.use(session({ secret: "ITM352 rocks!" }));
 
 
 
 //For all oputputs
 app.all('*', function (request, response, next) {
+    if (typeof request.session.cart == 'undefined') {
+        request.session.cart = {};
+    }
     console.log(request.method + ' to ' + request.path);
     next();
-
 });
 
 app.use(myParser.urlencoded({ extended: true })); // load my url that is encoded
@@ -42,40 +45,83 @@ if (fs.existsSync(filename)) {
 
 
 
+//-------------------Add to Cart----------------------//
+
+app.post("/add_to_cart", function (request, response) {
+  var POST = request.body;
+
+    //Algorithm FROM Alyssa Mencel's Assignment 1, some variables changed for my understanding and tailored to my own variables
+    if (typeof POST['add_qty'] != 'undefined') {
+
+        //Office Hours w/ Prof. Port on getting the Quantities from the form
+        var product_key = POST['product_type'];
+        var products = allproducts[product_key];
 
 
+        //Variables
+        no_errors = true;
+        has_quantities = false;
 
-//--------------Process_Login---------------//
+        //Validating
+        var quantities = [];
+        for (i = 0; i < products.length; i++) {
+            var purchase = POST[`quantity${i}`];
+            has_quantities = has_quantities || purchase > 0;
+            no_errors = has_quantities && isNonNegInt(purchase);
+        }
+        //Add to Cart
+        //Office Hours with Prof. Port, sets the session cart
+        if (no_errors && has_quantities) {
+            request.session.cart[product_key]=purchase;
+        }
+        console.log(request.session.cart);
+        response.redirect(request.get('Referrer')) ;// fix this
+    }
+    var stringified = qs.stringify(POST); //var
+   // response.redirect(request.get('Referrer')); //goes to the page you came from
+});
+
+// ------ Load In Product Data ----- //
+app.post("/get_products_data", function (request, response, next) {
+    response.json(allproducts);
+});
+//______Gives thes quantity data to cart.html_________//
+//____Assignment #3 Code Example + Tuesday Screencasts__//
+app.post("/get_cart", function (request, response){
+    console.log(request.session.cart);
+    response.json(request.session.cart);
+});
+
+//______________________Process_Login_________________________________//
 //Reference to 4/13/21 Lecture, Lab 13
 
 app.post('/process_login', function (request, response, next) {
-    if (typeof request.cookies ['username'] != 'undefined'){
-        response.send(`${request.cookies['username']} is already logged in`)
-    }
 
-    //give them a cookie to be tracked --> use the username to look up stuff in the json --> make cookie expire at a certain time
-    //respond with a cookie and their user id --> checck if their loggef
+
     //Variables
     var error = [];
     username = request.body.username;
-    console.log(request.query);
-    let username_entered = request.body["username"];
-    let password_entered = request.body["password"];
+    var username_entered = request.body["username"];
+    var password_entered = request.body["password"];
 
-    //---Check Login---//
+    //____Check Login_____//
     //check if the username is valid
     if (typeof user_data[username_entered] != 'undefined') {
         //check if it matches with password
         if (user_data[username_entered]['password'] == password_entered) {
             //All good, send to the invoice
-            request.query["purchase_submit"] = "true";
+            request.query["add_to_cart"] = "true";
             request.query["username"] = request.body["username"];
-            //Cookie --> Screencast 4/47/21, Lab 15 
-            response.cookies('username', username_entered);
+
+
+            //____Logging In____//
+            //Cookie --> Screencast 4/27/21, Lab 15 
+            response.cookie('username', username_entered);
+            console.log(response.cookie);
             response.redirect('invoice.html?' + qs.stringify(request.query));
 
 
-         //wrong password?, let the console know, push error to alert on login page
+            //wrong password?, let the console know, push error to alert on login page
         } else {
             error.push("Invalid Password");
             console.log(error);
@@ -85,21 +131,22 @@ app.post('/process_login', function (request, response, next) {
         }
 
 
-    //wrong username?, let the console know, push error to alert on login page
+        //wrong username?, let the console know, push error to alert on login page
     } else {
         error.push = ('Invalid Username');
         console.log(error);
         request.query.username = username;
         request.query.error = error.join(';');
     }
-    response.redirect('./login.html?' + qs.stringify(request.query)); // If error is present, remain on the login page
+    response.redirect('./Login.html?' + qs.stringify(request.query)); // If error is present, remain on the login page
 });
 
-
-
-//--------------Shopping Cart----------------//
-
-
+//_______________Logging Out________________//
+app.get("/logout" , function (request, response) {
+    var logout_str = `<script>alert('${user_data[username].name} has successfully logged out!'); location.href="./index.html";</script>`;
+    response.clearCookie('username');
+    response.send(logout_str);
+});
 
 //------------Process_Registration--------//
 //--Validations are reference to Alyssa Mencel's Fall 2020 Assignment 2, Notes also were reference--//
@@ -109,20 +156,20 @@ app.post('/process_registration', function (request, response) {
 
     //variables
     var RegError = [];
-    
+
     //--Validating Name---//
-    if (/^[A-Za-z]+$/.test(request.body.name)) { //Only letters
+    if (/^[A-Za-z] + [A-Za-z]+$/.test(request.body.name)) { //Only letters
     }
     else {
-      RegError.push('Use Only Letters for Full Name')
+        RegError.push('Use Only Letters for Full Name')
     }
 
 
     if (request.body.name == " ") { //requires this field
-      RegError.push('Invalid Full Name');
+        RegError.push('Invalid Full Name');
     }
-   
-    if (request.body.name.length > 30 && request.body.name.length < 0 ){
+
+    if (request.body.name.length > 30 && request.body.name.length < 0) {
     } else {
         RegError.push('Name Too Long');
     }
@@ -147,7 +194,7 @@ app.post('/process_registration', function (request, response) {
         RegError.push('Username taken');
     }
     //min 4 characters, max 10 characters
-    if (request.body.username.length > 4 || request.body.username.length < 10 ) {
+    if (request.body.username.length > 4 || request.body.username.length < 10) {
     } else {
         RegError.push('Username Invalid');
     }
@@ -164,9 +211,9 @@ app.post('/process_registration', function (request, response) {
     }
 
     //--Confirm Password---//
-    if (request.body.password !== request.body.cpassword) { 
+    if (request.body.password !== request.body.cpassword) {
         errors.push('Password Not a Match')
-    
+
     }
 
     //Sticky
@@ -182,7 +229,7 @@ app.post('/process_registration', function (request, response) {
         //Referred to Alyssa Mencel's server for this
 
         //variable
-        let POST = request.body;
+        var POST = request.body;
 
         //send data to user_data.json to be stored
         username = POST['username'];
@@ -194,51 +241,73 @@ app.post('/process_registration', function (request, response) {
 
         //Add the new user into the database (user_data.json)
         fs.writeFileSync(user_data_file, register, "utf-8");
-        request.query["purchase_submit"] = "true";
+        request.query["add_to_cart"] = "true";
         request.query["username"] = request.body["username"];
+
+        //Cookie --> Screencast 4/47/21, Lab 15 
+        response.cookies('username', username_entered);
+        console.log(response.cookie('username'));
         response.redirect('invoice.html?' + qs.stringify(request.query));
-    
+
     } else { //if there are errors, keep on reg page
         request.query.RegError = RegError.join(';');
-        response.redirect('registration.html?' + qs.stringify(request.query));
+        response.redirect('Registration.html?' + qs.stringify(request.query));
 
     }
 
 
 });
 
-//------Process_Purchase------//
 
-app.post("/process_purchase", function (request, response) {
-    let POST = request.body;
+//_____Sending Email____//
+//____Office Hours with Prof. Port. Showed how to utilize different posts to created a pathway for when the user clicks
+app.post('/checkout', function (request, response, next) {
+if (typeof request.cookies["username"]== 'undefined'){
+    response.redirect('./Login.html');
+    return;
+}
+var invoice = request.body;
+var user_info = request.cookies[user_data];
+var username= request.cookies["username"];
+var email=user_data[username].email;
+var invoice_str = JSON.stringify(request.session.cart); 
+var messagebody = invoice_str + `<br>Your invoice has been emailed to ${email}
+<br> Thank You for Order ${user_data[username].name}`;
+var shopping_cart = request.session.cart
+response.send(messagebody);
 
 
-   //Algorithm FROM Alyssa Mencel's Assignment 1, some variables changed for my understanding and tailored to my own variables
-    if (typeof POST['submitPurchase'] != 'undefine') {
+invoice_str += '</table>';
+// Set up mail server. Only will work on UH Network due to security restrictions
+var transporter = nodemailer.createTransport({
+  host: "mail.hawaii.edu",
+  port: 25,
+  secure: false, // use TLS
+  tls: {
+    // do not fail on invalid certs
+    rejectUnauthorized: false
+  }
+});
 
-        //Variables
-        no_errors = true;
-        has_quantities = false;
+var user_email = request.cookies[user_data].email;
+var mailOptions = {
+  from: 'aandres7@hawaii.edu',
+  to: user_email,
+  subject: 'Feng Shui Receipt',
+  html: invoice_str
+};
 
-        //Validating
-        for (i = 0; i < products.length; i++){
-            purchase = POST(`quantity${i}`);
-            no_errors = has_quantities || purchase > 0;
-            no_errors = has_quantities && isNonNegInt(purchase);
-        }
-        //send to login page
-        const stringified = qs.stringify(POST); //var
-        if (no_errors && has_quantities) {
-            response.redirect('./Login.html?' + stringfied);
-            return;
-        }
-        else {
-            //did not pass validation? stay on page
-            response.redirect('./products.html?' + stringified)
-        }
-    }
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    invoice_str += '<br>There was an error and your invoice could not be emailed :(';
+  } else {
+    invoice_str += `<br>Your invoice was mailed to ${user_email}`;
+  }
+  response.send(invoice_str);
+});
 
 });
+
 
 app.use(express.static('./static'));
 app.listen(8080, () => console.log(`listening on port 8080`));

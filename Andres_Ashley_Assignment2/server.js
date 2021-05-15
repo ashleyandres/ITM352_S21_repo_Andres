@@ -54,8 +54,8 @@ app.post('/process_login', function (request, response, next) {
     var error = [];
     username = request.body.username;
     console.log(request.query);
-    let username_entered = request.body["username"];
-    let password_entered = request.body["password"];
+    var username_entered = request.body["username"];
+    var password_entered = request.body["password"];
 
     //---Check Login---//
     //check if the username is valid
@@ -103,7 +103,7 @@ app.post('/process_registration', function (request, response) {
 
     //--Validating Name---//
     
-    if (/^[A-Za-z]+ [A-Za-z]+$/.test(request.body.name)) { //Only letters
+    if (/^[A-Za-z] + [A-Za-z]+$/.test(request.body.name)) { //Only letters
     }
     else {
       RegError.push('Use Only Letters for Full Name')
@@ -172,7 +172,7 @@ app.post('/process_registration', function (request, response) {
         //---Adding a new user---//
         //Used Lab 14 as foundation
         //variable
-        let POST = request.body;
+        var POST = request.body;
 
         //send data to user_data.json to be stored
         username = POST['username'];
@@ -200,7 +200,7 @@ app.post('/process_registration', function (request, response) {
 
 //------Process_Purchase------//
 app.post("/process_purchase", function (request, response) {
-    let POST = request.body;
+    var POST = request.body;
 
     //Algorithm FROM Alyssa Mencel's Assignment 1, some variables changed for my understanding and tailored to my own variables
 
@@ -211,15 +211,15 @@ app.post("/process_purchase", function (request, response) {
         has_quantities = false;
 
         //Validating
-        for (i = 0; i < products.length; i++) {
+        for (i = 0; i < products["product_type"].length; i++) {
             purchase = POST(`quantity${i}`);
             no_errors = has_quantities || purchase > 0;
-            no_errors = has_quantities && isNonNegInt(purchase);
+           
         }
         //send to login page
         const stringified = qs.stringify(POST); //var
-        if (no_errors && has_quantities) {
-            response.redirect('./login.html?' + stringfied);
+        if (no_errors || has_quantities) {
+            response.redirect('./Login.html?' + stringfied);
             return;
         }
         else {
